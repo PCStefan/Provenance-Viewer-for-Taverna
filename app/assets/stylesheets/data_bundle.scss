@@ -17,6 +17,22 @@
 * under the License.
 */
 
+.box {
+  border-top: 0px solid #d2d6de;
+}
+
+.well{
+  border: 0px solid #d2d6de;
+}
+
+#back_btn {
+  padding-left: 15px;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+  border: 1px solid #ddd;
+}
+
 svg {
   path.link {
     fill: none;

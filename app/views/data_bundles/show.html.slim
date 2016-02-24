@@ -1,31 +1,51 @@
 section.content-header
   h1
-    = "DataBundle #{@data_bundle.name}"
+    = "DataBundle View: #{@data_bundle.name}"
+
 section.content
-  = link_to '<- Back', data_bundles_path
-  .box.box-default
-    .box-body
-      table.table.table-bordered
-        tbody
-          tr
-            td Workflow name
-            td
-              = @data_bundle.workflow.annotations.name
-          tr
-            td Authors
-            td
-              = @data_bundle.workflow.annotations.authors.join(' ')
-          tr
-            td Titles
-            td
-              = @data_bundle.workflow.annotations.titles.join(' ')
-          tr
-            td Description
-            td
-              = @data_bundle.workflow.annotations.descriptions.join(' ')
-          tr
-            td Semantic annotation
-            td
-              = @data_bundle.workflow.annotations.semantic_annotation
-      svg#graphContainer
+  #back_btn
+    = link_to '<< Back', data_bundles_path
+
+  .container-fluid
+    .row-fluid
+      .span8.well
+        ul.nav.nav-tabs
+          li.active
+            a data-target="#workflow" data-toggle="tab" href="#workflow"  Workflow
+          li
+            a data-target="#provenance" data-toggle="tab" href="#provenance"  Provenance
+        .tab-content
+          #workflow.tab-pane.active.fade.in 
+            .box.box-default
+              .box-body
+                table.table.table-bordered
+                  tbody
+                    tr
+                      td Workflow name
+                      td
+                        = @data_bundle.workflow.annotations.name
+                    tr
+                      td Authors
+                      td
+                        = @data_bundle.workflow.annotations.authors.join(' ')
+                    tr
+                      td Titles
+                      td
+                        = @data_bundle.workflow.annotations.titles.join(' ')
+                    tr
+                      td Description
+                      td
+                        = @data_bundle.workflow.annotations.descriptions.join(' ')
+                    tr
+                      td Semantic annotation
+                      td
+                        - if @data_bundle.workflow.annotations.semantic_annotation.nil?
+                          | -
+                        - else
+                          = @data_bundle.workflow.annotations.semantic_annotation
+                svg#graphContainer
+
+          #provenance.tab-pane
+            = @data_bundle.test1
+
 #data_bundle data-url=data_bundle_url(@data_bundle, format: :json)

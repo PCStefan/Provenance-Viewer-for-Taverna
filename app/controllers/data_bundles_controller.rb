@@ -77,5 +77,5 @@ class DataBundlesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def data_bundle_params
     params.require(:data_bundle).permit(:file, :name)
-  end
+  end  
 end

@@ -57,6 +57,7 @@ class DataBundleDecorator < Draper::Decorator
       t2flow_name = manifest.xpath('//manifest:file-entry[@manifest:media-type="application/vnd.taverna.t2flow+xml"][@manifest:size]').first['manifest:full-path']
       file = File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
       @workflow = T2Flow::Parser.new.parse(file)
+      puts @workflow.inspect
     end
 
     @workflow
@@ -86,5 +87,10 @@ class DataBundleDecorator < Draper::Decorator
 
   def processor_by_name(dataflow, name)
     dataflow.processors.select { |p| p.name == name.split(':').first }.first.name
+  end
+
+  # test function for jquery
+  def test1 
+    @test = "test string"
   end
 end
