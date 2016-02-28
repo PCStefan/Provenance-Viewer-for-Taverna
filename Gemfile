@@ -56,6 +56,10 @@ gem 'ro-bundle'
 # A Ruby library to aid the interaction with Taverna 2 workflows
 gem 'workflow_parser', github: 'myExperiment/workflow_parser'
 gem 'taverna-t2flow', github: 'myExperiment/workflow_parser-t2flow'
+
+# taverna t2-flow has rdf-turtle as dependency
+#gem 'rdf-turtle', github: 'ruby-rdf/rdf-turtle'
+
 # A simple interface to working with ZIP archives
 gem 'archive-zip'
 # Paginator

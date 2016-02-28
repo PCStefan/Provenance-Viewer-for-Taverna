@@ -53,11 +53,12 @@ class DataBundleDecorator < Draper::Decorator
 
   def workflow
     if @workflow.nil?
+
       manifest = Nokogiri::XML(File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml"))
+      stefan = File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml")
       t2flow_name = manifest.xpath('//manifest:file-entry[@manifest:media-type="application/vnd.taverna.t2flow+xml"][@manifest:size]').first['manifest:full-path']
       file = File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
       @workflow = T2Flow::Parser.new.parse(file)
-      puts @workflow.inspect
     end
 
     @workflow
@@ -89,8 +90,48 @@ class DataBundleDecorator < Draper::Decorator
     dataflow.processors.select { |p| p.name == name.split(':').first }.first.name
   end
 
-  # test function for jquery
+  # test function for jquery tabs
   def test1 
     @test = "test string"
   end
+
+  # find the provenance file
+  # how to extract info from file see http://ruby-rdf.github.io/ , section Querying RDF data using basic graph patterns
+  def provenance
+    if @provenance.nil?
+
+      # Open the prov file 
+      file = RDF::Repository.load("#{object.file_path}workflowrun.prov.ttl") 
+      puts file
+      puts "-------------"
+      puts file.inspect
+
+      # Write the query (like selection from database)
+      query = RDF::Query.new({
+        :person => {
+          RDF.type  => RDF::FOAF.Person,
+          RDF::FOAF.name => :name,
+          RDF::FOAF.mbox => :email,
+        }
+      })
+
+      # #Query using this
+      # query.execute(file).each do |solution|
+      #   puts "name=#{solution.name} email=#{solution.email}"
+      # end
+
+      @provenance = "check console"
+
+      # RDF::Reader.open("#{object.file_path}workflowrun.prov.ttl") do |reader|
+      #   reader.each_statement do |statement|
+      #     puts statement.inspect
+      #   end
+      # end 
+
+    end # if provenance
+
+    #return 
+    @provenance 
+  end # def provenance
+
 end
