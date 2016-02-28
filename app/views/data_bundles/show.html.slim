@@ -46,6 +46,12 @@ section.content
                 svg#graphContainer
 
           #provenance.tab-pane
-            = @data_bundle.provenance
+            - if @data_bundle.provenanceMain.present?
+              - @data_bundle.provenanceMain.each_statement do |subject|
+                = subject     
+                br
+            - else
+              .row -
+
 
 #data_bundle data-url=data_bundle_url(@data_bundle, format: :json)

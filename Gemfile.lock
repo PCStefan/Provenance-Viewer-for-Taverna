@@ -278,6 +278,7 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    net-http-persistent (2.9.4)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.1.0)
@@ -343,8 +344,12 @@ GEM
       trollop
     rdf (1.99.1)
       link_header (~> 0.0, >= 0.0.8)
+    rdf-aggregate-repo (1.99.0)
+      rdf (~> 1.99)
     rdf-turtle (1.99.0)
       ebnf (~> 1.0)
+      rdf (~> 1.99)
+    rdf-xsd (1.99.0)
       rdf (~> 1.99)
     rdoc (4.2.2)
       json (~> 1.4)
@@ -372,6 +377,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-graphviz (1.2.2)
     rubyzip (1.1.7)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -397,6 +403,17 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
+    sparql (1.99.0)
+      builder (~> 3.2)
+      ebnf (~> 1.0)
+      rdf (~> 1.99)
+      rdf-aggregate-repo (~> 1.99)
+      rdf-xsd (~> 1.1)
+      sparql-client (~> 1.1)
+      sxp (~> 0.1)
+    sparql-client (1.99.0)
+      net-http-persistent (~> 2.9)
+      rdf (~> 1.1)
     spring (1.6.3)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -463,10 +480,12 @@ DEPENDENCIES
   rails_12factor
   ro-bundle
   rspec-rails
+  ruby-graphviz
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim
   slim-rails
+  sparql
   spring
   taverna-t2flow!
   uglifier (>= 1.3.0)

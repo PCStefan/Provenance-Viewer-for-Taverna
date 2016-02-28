@@ -97,41 +97,74 @@ class DataBundleDecorator < Draper::Decorator
 
   # find the provenance file
   # how to extract info from file see http://ruby-rdf.github.io/ , section Querying RDF data using basic graph patterns
-  def provenance
+  def provenanceMain
+    
     if @provenance.nil?
 
-      # Open the prov file 
-      file = RDF::Repository.load("#{object.file_path}workflowrun.prov.ttl") 
-      puts file
-      puts "-------------"
-      puts file.inspect
+      # create a graph
+      graph = RDF::Graph.new
+      p "==========================>>>>  Create empty graph"
+      p "Check if the graph is empty. (correct : true)"
+      p "=> #{graph.empty?}"
+      p "See the length: (correct : 0)"
+      p "=> #{graph.count}"
 
-      # Write the query (like selection from database)
-      query = RDF::Query.new({
-        :person => {
-          RDF.type  => RDF::FOAF.Person,
-          RDF::FOAF.name => :name,
-          RDF::FOAF.mbox => :email,
-        }
-      })
 
-      # #Query using this
-      # query.execute(file).each do |solution|
-      #   puts "name=#{solution.name} email=#{solution.email}"
-      # end
+      # Add the prov data in turtle format
+      RDF::Reader.open("https://raw.githubusercontent.com/Data2Semantics/provoviz/master/src/app/static/prov-o.ttl") do |reader|
+        reader.each_statement do |statement|
+          graph.insert(statement)
+        end
+      end 
 
-      @provenance = "check console"
+      p "==========================>>>>  Loading PROV data in Turtle format"
+      p "Check if the graph is empty. (correct : false)"
+      p "=> #{graph.empty?}"
+      p "See the length: (correct : >0)"
+      p "=> #{graph.count}"
 
+
+      # Generating graph
+      # get the data (as triplets{sub,pred, obj}) from the file into the graph 
       # RDF::Reader.open("#{object.file_path}workflowrun.prov.ttl") do |reader|
-      #   reader.each_statement do |statement|
-      #     puts statement.inspect
-      #   end
-      # end 
+      RDF::Reader.open("https://raw.githubusercontent.com/Data2Semantics/provoviz/master/examples/workflowrun-taverna-provo.n3") do |reader|
+        reader.each_statement do |statement|
+          graph.insert(statement)
+        end
+      end 
 
+      p "==========================>>>>  Generating graphs"
+      p "Parse source file adding the resulting triples to the Graph."
+      p "Check if any triplet has been inserted into the graph. (correct : false)"
+      p "=> #{graph.empty?}"
+      p "See the length: (correct : >0)"
+      p "=> #{graph.count}"
+
+
+
+      # Generating provenance graphs...
+      buildFullGraph
+
+      p "==========================>>>>  Generating provenance graphs..."
+
+
+
+      @provenance = graph
     end # if provenance
 
     #return 
     @provenance 
   end # def provenance
+
+
+
+  def buildFullGraph
+    p "/buildFullGraph------------->>>>  Building full provenance graph..."
+
+
+
+
+    p "Running activity_to_resource"
+  end
 
 end
