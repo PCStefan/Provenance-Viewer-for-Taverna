@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:RDF xmlns="http://ns.taverna.org.uk/2010/scufl2#" xmlns:ns2="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ns3="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="WorkflowDocument" xml:base="Hello_Anyone/" xsi:schemaLocation="http://ns.taverna.org.uk/2010/scufl2# http://ns.taverna.org.uk/2010/scufl2/scufl2.xsd http://www.w3.org/1999/02/22-rdf-syntax-ns# http://ns.taverna.org.uk/2010/scufl2/rdf.xsd">
+    <Workflow ns2:about="">
+        <name>Hello_Anyone</name>
+        <workflowIdentifier ns2:resource="http://ns.taverna.org.uk/2010/workflow/01348671-5aaa-4cc2-84cc-477329b70b0d/"/>
+        <inputWorkflowPort>
+            <InputWorkflowPort ns2:about="in/name">
+                <name>name</name>
+                <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+            </InputWorkflowPort>
+        </inputWorkflowPort>
+        <outputWorkflowPort>
+            <OutputWorkflowPort ns2:about="out/greeting">
+                <name>greeting</name>
+            </OutputWorkflowPort>
+        </outputWorkflowPort>
+        <processor>
+            <Processor ns2:about="processor/Concatenate_two_strings/">
+                <name>Concatenate_two_strings</name>
+                <inputProcessorPort>
+                    <InputProcessorPort ns2:about="processor/Concatenate_two_strings/in/string1">
+                        <name>string1</name>
+                        <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                    </InputProcessorPort>
+                </inputProcessorPort>
+                <inputProcessorPort>
+                    <InputProcessorPort ns2:about="processor/Concatenate_two_strings/in/string2">
+                        <name>string2</name>
+                        <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                    </InputProcessorPort>
+                </inputProcessorPort>
+                <outputProcessorPort>
+                    <OutputProcessorPort ns2:about="processor/Concatenate_two_strings/out/output">
+                        <name>output</name>
+                        <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                        <granularPortDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</granularPortDepth>
+                    </OutputProcessorPort>
+                </outputProcessorPort>
+                <iterationStrategyStack>
+                    <IterationStrategyStack ns2:about="processor/Concatenate_two_strings/iterationstrategy/">
+                        <iterationStrategies ns2:parseType="Collection">
+                            <CrossProduct ns2:about="processor/Concatenate_two_strings/iterationstrategy/0/">
+<productOf ns2:parseType="Collection">
+    <PortNode ns2:about="processor/Concatenate_two_strings/iterationstrategy/0/0/">
+        <iterateOverInputPort ns2:resource="processor/Concatenate_two_strings/in/string1"/>
+        <desiredDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</desiredDepth>
+    </PortNode>
+    <PortNode ns2:about="processor/Concatenate_two_strings/iterationstrategy/0/1/">
+        <iterateOverInputPort ns2:resource="processor/Concatenate_two_strings/in/string2"/>
+        <desiredDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</desiredDepth>
+    </PortNode>
+</productOf>
+                            </CrossProduct>
+                        </iterationStrategies>
+                    </IterationStrategyStack>
+                </iterationStrategyStack>
+            </Processor>
+        </processor>
+        <processor>
+            <Processor ns2:about="processor/hello/">
+                <name>hello</name>
+                <outputProcessorPort>
+                    <OutputProcessorPort ns2:about="processor/hello/out/value">
+                        <name>value</name>
+                        <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                        <granularPortDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</granularPortDepth>
+                    </OutputProcessorPort>
+                </outputProcessorPort>
+                <iterationStrategyStack>
+                    <IterationStrategyStack ns2:about="processor/hello/iterationstrategy/"/>
+                </iterationStrategyStack>
+            </Processor>
+        </processor>
+        <datalink>
+            <DataLink ns2:about="datalink?from=processor/Concatenate_two_strings/out/output&amp;to=out/greeting">
+                <receiveFrom ns2:resource="processor/Concatenate_two_strings/out/output"/>
+                <sendTo ns2:resource="out/greeting"/>
+            </DataLink>
+        </datalink>
+        <datalink>
+            <DataLink ns2:about="datalink?from=processor/hello/out/value&amp;to=processor/Concatenate_two_strings/in/string1">
+                <receiveFrom ns2:resource="processor/hello/out/value"/>
+                <sendTo ns2:resource="processor/Concatenate_two_strings/in/string1"/>
+            </DataLink>
+        </datalink>
+        <datalink>
+            <DataLink ns2:about="datalink?from=in/name&amp;to=processor/Concatenate_two_strings/in/string2">
+                <receiveFrom ns2:resource="in/name"/>
+                <sendTo ns2:resource="processor/Concatenate_two_strings/in/string2"/>
+            </DataLink>
+        </datalink>
+    </Workflow>
+</ns2:RDF>

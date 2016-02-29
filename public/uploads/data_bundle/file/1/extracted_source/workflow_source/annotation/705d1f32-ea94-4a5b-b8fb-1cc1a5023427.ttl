@@ -1,0 +1,1 @@
+<../workflow/Hello_Anyone/in/name> <http://biocatalogue.org/attribute/exampleData> """World!""" .

@@ -48,7 +48,7 @@ section.content
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
               - @data_bundle.provenanceMain.each_statement do |subject|
-                = subject     
+                | -     
                 br
             - else
               .row -

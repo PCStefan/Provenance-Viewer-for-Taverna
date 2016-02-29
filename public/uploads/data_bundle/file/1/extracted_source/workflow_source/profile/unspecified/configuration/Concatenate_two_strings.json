@@ -1,0 +1,1 @@
+{"derivedFrom":"http://ns.taverna.org.uk/2010/activity/localworker/org.embl.ebi.escience.scuflworkers.java.StringConcat","script":"output = string1 + string2;"}

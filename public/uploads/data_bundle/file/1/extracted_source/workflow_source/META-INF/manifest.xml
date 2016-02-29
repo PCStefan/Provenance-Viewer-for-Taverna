@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/"/>
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/705d1f32-ea94-4a5b-b8fb-1cc1a5023427.ttl" manifest:size="97"/>
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/0f1641bd-49ef-41bd-9e4b-e20cc2bf37bb.ttl" manifest:size="108"/>
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/d007623d-cd94-4888-a583-e8d97953a159.ttl" manifest:size="97"/>
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/e9eb11fa-fc63-4ddc-92ca-ec6921af1667.ttl" manifest:size="81"/>
+ <manifest:file-entry manifest:media-type="text/turtle" manifest:full-path="annotation/c5e91716-2f9f-4e7c-a692-8f58dba265e3.ttl" manifest:size="324"/>
+ <manifest:file-entry manifest:media-type="application/vnd.taverna.t2flow+xml" manifest:full-path="history/"/>
+ <manifest:file-entry manifest:media-type="application/vnd.taverna.t2flow+xml" manifest:full-path="history/01348671-5aaa-4cc2-84cc-477329b70b0d.t2flow" manifest:size="13628"/>
+ <manifest:file-entry manifest:media-type="application/rdf+xml" manifest:full-path="workflow/"/>
+ <manifest:file-entry manifest:media-type="application/rdf+xml" manifest:full-path="workflow/Hello_Anyone.rdf" manifest:size="5523"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/configuration/"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/configuration/Concatenate_two_strings.json" manifest:size="160"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/configuration/Concatenate_two_strings-proc.json" manifest:size="2"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/configuration/hello.json" manifest:size="20"/>
+ <manifest:file-entry manifest:media-type="application/json" manifest:full-path="profile/unspecified/configuration/hello-proc.json" manifest:size="2"/>
+ <manifest:file-entry manifest:media-type="application/rdf+xml" manifest:full-path="profile/unspecified.rdf" manifest:size="6748"/>
+ <manifest:file-entry manifest:media-type="application/rdf+xml" manifest:full-path="workflowBundle.rdf" manifest:size="1239" manifest:version="0.4.0"/>
+</manifest:manifest>

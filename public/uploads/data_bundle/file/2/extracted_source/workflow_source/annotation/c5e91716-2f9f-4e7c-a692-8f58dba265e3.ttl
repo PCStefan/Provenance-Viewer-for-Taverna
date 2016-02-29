@@ -1,0 +1,1 @@
+<../workflow/Hello_Anyone/> <http://purl.org/dc/terms/description> """An extension to helloworld.t2flow - this workflow takes a workflow input "name" which is combined with the string constant "Hello, " using the local worker "Concatenate two strings", and outputs the produced string to the workflow output "greeting".""" .

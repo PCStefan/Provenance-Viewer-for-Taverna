@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:RDF xmlns="http://ns.taverna.org.uk/2010/scufl2#" xmlns:ns2="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ns3="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ProfileDocument" xml:base="unspecified/" xsi:schemaLocation="http://ns.taverna.org.uk/2010/scufl2# http://ns.taverna.org.uk/2010/scufl2/scufl2.xsd http://www.w3.org/1999/02/22-rdf-syntax-ns# http://ns.taverna.org.uk/2010/scufl2/rdf.xsd">
+    <Profile ns2:about="">
+        <name>unspecified</name>
+        <processorBinding ns2:resource="processorbinding/Concatenate_two_strings/"/>
+        <processorBinding ns2:resource="processorbinding/hello/"/>
+        <activateConfiguration ns2:resource="configuration/Concatenate_two_strings/"/>
+        <activateConfiguration ns2:resource="configuration/Concatenate_two_strings-proc/"/>
+        <activateConfiguration ns2:resource="configuration/hello/"/>
+        <activateConfiguration ns2:resource="configuration/hello-proc/"/>
+    </Profile>
+    <Activity ns2:about="activity/Concatenate_two_strings/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/activity/beanshell"/>
+        <name>Concatenate_two_strings</name>
+        <inputActivityPort>
+            <InputActivityPort ns2:about="activity/Concatenate_two_strings/in/string1">
+                <name>string1</name>
+                <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+            </InputActivityPort>
+        </inputActivityPort>
+        <inputActivityPort>
+            <InputActivityPort ns2:about="activity/Concatenate_two_strings/in/string2">
+                <name>string2</name>
+                <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+            </InputActivityPort>
+        </inputActivityPort>
+        <outputActivityPort>
+            <OutputActivityPort ns2:about="activity/Concatenate_two_strings/out/output">
+                <name>output</name>
+                <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                <granularPortDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</granularPortDepth>
+            </OutputActivityPort>
+        </outputActivityPort>
+    </Activity>
+    <Activity ns2:about="activity/hello/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/activity/constant"/>
+        <name>hello</name>
+        <outputActivityPort>
+            <OutputActivityPort ns2:about="activity/hello/out/value">
+                <name>value</name>
+                <portDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</portDepth>
+                <granularPortDepth ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</granularPortDepth>
+            </OutputActivityPort>
+        </outputActivityPort>
+    </Activity>
+    <ProcessorBinding ns2:about="processorbinding/Concatenate_two_strings/">
+        <name>Concatenate_two_strings</name>
+        <bindActivity ns2:resource="activity/Concatenate_two_strings/"/>
+        <bindProcessor ns2:resource="../../workflow/Hello_Anyone/processor/Concatenate_two_strings/"/>
+        <activityPosition ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</activityPosition>
+        <inputPortBinding>
+            <InputPortBinding ns2:about="processorbinding/Concatenate_two_strings/in/string2">
+                <bindInputActivityPort ns2:resource="activity/Concatenate_two_strings/in/string2"/>
+                <bindInputProcessorPort ns2:resource="../../workflow/Hello_Anyone/processor/Concatenate_two_strings/in/string2"/>
+            </InputPortBinding>
+        </inputPortBinding>
+        <inputPortBinding>
+            <InputPortBinding ns2:about="processorbinding/Concatenate_two_strings/in/string1">
+                <bindInputActivityPort ns2:resource="activity/Concatenate_two_strings/in/string1"/>
+                <bindInputProcessorPort ns2:resource="../../workflow/Hello_Anyone/processor/Concatenate_two_strings/in/string1"/>
+            </InputPortBinding>
+        </inputPortBinding>
+        <outputPortBinding>
+            <OutputPortBinding ns2:about="processorbinding/Concatenate_two_strings/out/output">
+                <bindOutputActivityPort ns2:resource="activity/Concatenate_two_strings/out/output"/>
+                <bindOutputProcessorPort ns2:resource="../../workflow/Hello_Anyone/processor/Concatenate_two_strings/out/output"/>
+            </OutputPortBinding>
+        </outputPortBinding>
+    </ProcessorBinding>
+    <ProcessorBinding ns2:about="processorbinding/hello/">
+        <name>hello</name>
+        <bindActivity ns2:resource="activity/hello/"/>
+        <bindProcessor ns2:resource="../../workflow/Hello_Anyone/processor/hello/"/>
+        <activityPosition ns2:datatype="http://www.w3.org/2001/XMLSchema#integer">0</activityPosition>
+        <outputPortBinding>
+            <OutputPortBinding ns2:about="processorbinding/hello/out/value">
+                <bindOutputActivityPort ns2:resource="activity/hello/out/value"/>
+                <bindOutputProcessorPort ns2:resource="../../workflow/Hello_Anyone/processor/hello/out/value"/>
+            </OutputPortBinding>
+        </outputPortBinding>
+    </ProcessorBinding>
+    <Configuration ns2:about="configuration/Concatenate_two_strings/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/activity/beanshell#Config"/>
+        <ns3:seeAlso ns2:resource="configuration/Concatenate_two_strings.json"/>
+        <name>Concatenate_two_strings</name>
+        <configure ns2:resource="activity/Concatenate_two_strings/"/>
+    </Configuration>
+    <Configuration ns2:about="configuration/Concatenate_two_strings-proc/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/scufl2#ProcessorConfig"/>
+        <ns3:seeAlso ns2:resource="configuration/Concatenate_two_strings-proc.json"/>
+        <name>Concatenate_two_strings-proc</name>
+        <configure ns2:resource="../../workflow/Hello_Anyone/processor/Concatenate_two_strings/"/>
+    </Configuration>
+    <Configuration ns2:about="configuration/hello/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/activity/constant#Config"/>
+        <ns3:seeAlso ns2:resource="configuration/hello.json"/>
+        <name>hello</name>
+        <configure ns2:resource="activity/hello/"/>
+    </Configuration>
+    <Configuration ns2:about="configuration/hello-proc/">
+        <ns2:type ns2:resource="http://ns.taverna.org.uk/2010/scufl2#ProcessorConfig"/>
+        <ns3:seeAlso ns2:resource="configuration/hello-proc.json"/>
+        <name>hello-proc</name>
+        <configure ns2:resource="../../workflow/Hello_Anyone/processor/hello/"/>
+    </Configuration>
+</ns2:RDF>
