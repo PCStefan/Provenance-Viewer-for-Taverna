@@ -31,7 +31,8 @@
         return
 
       nodes = {}
-      links.forEach (link) ->
+
+      links.workflow.forEach (link) ->
         link.source = nodes[link.source] or (nodes[link.source] =
             name: link.source, file_content: link.file_content)
         link.target = nodes[link.target] or (nodes[link.target] =

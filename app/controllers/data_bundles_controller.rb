@@ -34,7 +34,8 @@ class DataBundlesController < ApplicationController
     @data_bundle = @data_bundle.decorate
     respond_to do |format|
       format.html
-      format.json { render json: @data_bundle.to_json }
+      format.json { render :json => {:workflow => @data_bundle.to_json,
+                                     :provenance =>  @data_bundle.provenanceMain } }
     end
   end
 

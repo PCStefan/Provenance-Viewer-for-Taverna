@@ -47,11 +47,11 @@ section.content
 
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
-              - @data_bundle.provenanceMain.each_statement do |subject|
-                | -     
-                br
+              = @data_bundle.provenanceMain     
+              br
             - else
               .row -
+              br
 
 
 #data_bundle data-url=data_bundle_url(@data_bundle, format: :json)
