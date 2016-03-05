@@ -34,6 +34,7 @@ class DataBundlesController < ApplicationController
     @data_bundle = @data_bundle.decorate
     respond_to do |format|
       format.html
+      # format.json { render json: @data_bundle.to_json }
       format.json { render :json => {:workflow => @data_bundle.to_json,
                                      :provenance =>  @data_bundle.provenanceMain } }
     end
@@ -41,6 +42,7 @@ class DataBundlesController < ApplicationController
 
   # GET /data_bundles/1/edit
   def edit
+    redirect_to data_bundles_path,  notice: "Success"
   end
 
   # POST /data_bundles
