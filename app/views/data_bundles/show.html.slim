@@ -9,11 +9,11 @@ section.content
   .container-fluid
     .row-fluid
       .span8.well
-        ul.nav.nav-tabs
+        ul#subject.nav.nav-tabs
           li.active
-            a data-target="#workflow" data-toggle="tab" href="#workflow"  Workflow
+            a data-target="#workflow" data-toggle="tab"  Workflow
           li
-            a data-target="#provenance" data-toggle="tab" href="#provenance"  Provenance
+            a data-target="#provenance" data-toggle="tab"  Provenance
         .tab-content
           #workflow.tab-pane.active.fade.in 
             .box.box-default
@@ -47,11 +47,20 @@ section.content
 
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
-              = @data_bundle.provenanceMain     
-              br
+              .container-fluid
+                .row-fluid
+                  .span8.well
+                    ul#diagramType.nav.nav-tabs
+                      li.active
+                        a#diagramSankey data-target="#provSankey" data-toggle="tab" Sankey
+                      li
+                        a#diagramMiserables data-target="#provMiserable" data-toggle="tab" Miserables
+                    .tab-content
+                        svg#provContainer
             - else
-              .row -
+              .row No data to display
               br
+            
 
 
 #data_bundle data-url=data_bundle_url(@data_bundle, format: :json)

@@ -21,6 +21,10 @@
   border-top: 0px solid #d2d6de;
 }
 
+.box-body {
+  padding: 0px;
+}
+
 .well{
   border: 0px solid #d2d6de;
 }
@@ -30,7 +34,9 @@
 }
 
 #provenance {
-  white-space: pre-line;
+  .well, .container-fluid  {
+    padding: 0px;
+  }
 }
 
 .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
@@ -52,7 +58,7 @@ svg {
 
   text {
     fill: #000;
-    font: 10px sans-serif;
+    font: 14px sans-serif;
     pointer-events: none;
   }
 
