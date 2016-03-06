@@ -47,38 +47,42 @@ class Provenance
   def getAllWorkflowRuns
   	# create the query
 		sparql_query = SPARQL.parse("#{Provenance.prefixes}
-			SELECT ?workflowRun ?wasPartOfWorkflowRun
-			WHERE
-			{ ?workflowRun	rdf:type	wfprov:WorkflowRun	.
-		    OPTIONAL
-	      { 
-	      	?workflowRun	wfprov:wasPartOfWorkflowRun	?wasPartOfWorkflowRun .
-	      }
-		  }")
+			SELECT *
+      WHERE
+        { 
+          ?workflowRun  rdf:type  wfprov:WorkflowRun
+          OPTIONAL
+          { ?workflowRun  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflowRun }
+        }")
 
 		#return the result of the performing the query
     sparql_query.execute(@graph)
   end
-
+ 
   # Get all the ProcessRuns and their outlinks
   def getAllProcessRuns
-  	sparql_query = SPARQL.parse("#{Provenance.prefixes}
-			SELECT ?processURI ?wasPartOfWorkflow ?usedInput ?engineUsed
-			WHERE { 
-				?processURI	rdf:type	wfprov:ProcessRun	.
-				OPTIONAL
-				{
-					?processURI	wfprov:wasPartOfWorkflowRun	?wasPartOfWorkflow	.
-				}
-				OPTIONAL
-				{
-					?processURI	wfprov:usedInput	?usedInput	.
-				}
-				OPTIONAL
-				{
-					?processURI	wfprov:wasEnactedBy	?engineUsed	.
-				}
-			}")
+  	sparql_query = SPARQL.parse("#{Provenance.prefixes}		
+      SELECT  *
+      WHERE
+      { 
+        ?processURI  rdf:type         wfprov:ProcessRun ;
+                     prov:startedAtTime  ?startedAtTime ;
+                     prov:endedAtTime    ?endedAtTime
+        OPTIONAL
+          { ?processURI  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflow }
+        OPTIONAL
+        { 
+          ?processURI  wfprov:usedInput  ?usedArtifactInput
+          FILTER NOT EXISTS { ?usedArtifactInput  rdf:type  prov:Dictionary  }
+        }
+        OPTIONAL
+        { 
+          ?processURI  wfprov:usedInput  ?usedDictionaryInput .
+          ?usedDictionaryInput  rdf:type  prov:Dictionary
+        }
+        OPTIONAL
+          { ?processURI  wfprov:wasEnactedBy  ?engineUsed }
+      }")
 
   	# return the processes that were used
     sparql_query.execute(@graph)
@@ -88,28 +92,41 @@ class Provenance
   def getAllArtifacts
   	# create the query
 		sparql_query = SPARQL.parse("#{Provenance.prefixes}
-			SELECT ?artifactURI ?outputFromWorkflowRun ?outputFromProcessRun ?dictionary ?hadMember
-      WHERE {
-        {
-          ?artifactURI  rdf:type  wfprov:Artifact .
+			SELECT *
+      WHERE
+      {
+        { 
+          ?artifactURI  rdf:type  wfprov:Artifact
           OPTIONAL
-          {
-            ?artifactURI  wfprov:wasOutputFrom  ?outputFromWorkflowRun  .
-            ?outputFromWorkflowRun rdf:type  wfprov:WorkflowRun  .
+          { 
+            ?artifactURI  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
+            ?outputFromWorkflowRun  rdf:type  wfprov:WorkflowRun
           }
           OPTIONAL
-          {
+          { 
             ?artifactURI  wfprov:wasOutputFrom  ?outputFromProcessRun .
-            ?outputFromProcessRun rdf:type  wfprov:ProcessRun .
+            ?outputFromProcessRun  rdf:type  wfprov:ProcessRun  ;
+                                   prov:startedAtTime  ?startedAtTime ;
+                                   prov:endedAtTime    ?endedAtTime
           }
-          FILTER (NOT EXISTS {?artifactURI  rdf:type  prov:Dictionary . } ) 
+          FILTER NOT EXISTS { ?artifactURI  rdf:type  prov:Dictionary }
         }
         UNION
-        {
-          ?dictionary  rdf:type prov:Dictionary .
+        { 
+          ?dictionary  rdf:type  prov:Dictionary
           OPTIONAL
-          {
-            ?dictionary  prov:hadMember ?hadMember .
+            { ?dictionary  prov:hadMember  ?hadMember }
+          OPTIONAL
+          { 
+            ?dictionary  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
+            ?outputFromWorkflowRun  rdf:type  wfprov:WorkflowRun
+          }
+          OPTIONAL
+          { 
+            ?dictionary  wfprov:wasOutputFrom  ?outputFromProcessRun .
+            ?outputFromProcessRun  rdf:type  wfprov:ProcessRun  ;
+                                   prov:startedAtTime  ?startedAtTime ;
+                                   prov:endedAtTime    ?endedAtTime
           }
         }
       }")
@@ -169,7 +186,7 @@ class Provenance
   		processRunURI = result["processURI"].to_s
 
   		# a temp node for current (Decide whether to be added or not)
-  		processRun = {:name => processRunURI, :type => "Process Run"}
+  		processRun = {:name => processRunURI, :type => "Process Run", :startedAtTime => result["startedAtTime"].to_s, :endedAtTime =>result["endedAtTime"].to_s}
 
   		# see if exists
   		indexSource = nodes.find_index(processRun)
@@ -199,8 +216,8 @@ class Provenance
   		end
       
   		# check if has property usedInput 
-  		if result["usedInput"].present?
-  			artifact = {:name => result["usedInput"].to_s, :type => "Artifact"}
+  		if result["usedArtifactInput"].present?
+  			artifact = {:name => result["usedArtifactInput"].to_s, :type => "Artifact" }
 
   			indexTarget = nodes.find_index(artifact)
 
@@ -215,6 +232,26 @@ class Provenance
   				links << linkProcessToArtifact
   			end
   		end
+
+      # check if has property usedInput 
+      if result["usedDictionaryInput"].present?
+        dictionary = {:name => result["usedDictionaryInput"].to_s, :type => "Dictionary" }
+
+        indexTarget = nodes.find_index(artifact)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << dictionary
+        end
+
+        # add the link
+        linkProcessToArtifact = {:source => indexSource, :target => indexTarget, :value => "50"}
+        if links.find_index(linkProcessToArtifact).blank?
+          links << linkProcessToArtifact
+        end
+      end
+
+
 
   		# check if has property engineUsed which represents the wfprov:wasEnactedBy 
   		if result["engineUsed"].present?
@@ -265,7 +302,7 @@ class Provenance
 
   		# check if it has the property wasOutputFrom a process Run and add a link entity-process
   		if result["outputFromProcessRun"].present?
-				processRun = {:name => result["outputFromProcessRun"].to_s, :type => "Process Run"}
+				processRun = {:name => result["outputFromProcessRun"].to_s, :type => "Process Run", :startedAtTime => result["startedAtTime"].to_s, :endedAtTime =>result["endedAtTime"].to_s}
 		
 				indexTarget = nodes.find_index(processRun)
 

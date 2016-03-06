@@ -151,7 +151,10 @@ $(document).ready ->
 
       # set the text for the edges
       link.append('title').text (d) ->
-        d.source.type + ': ' + d.source.name + '\n → \n' + d.target.type + ': ' +  d.target.name
+        startText = d.source.type + ' → ' + d.target.type + '\n' + d.source.type + ':\nURI: ' +  d.source.name
+        dash = '\n-----------------------------------------------------------\n'
+        endText = d.target.type + ':\nURI: ' + d.target.name
+        startText + dash + endText
 
       # create the function to drag the node 
       dragmove = (d) ->
@@ -187,7 +190,40 @@ $(document).ready ->
       ).style('stroke', (d) ->
         d3.rgb(d.color).darker 1
       ).append('title').text (d) ->
-        d.type + ':  ' + d.name 
+        startTime = new Date()
+        endTime = new Date()
+        nodeTime = 0
+        if(d.hasOwnProperty("startedAtTime"))
+          startTime = new Date(d.startedAtTime)
+          endTime = new Date(d.endedAtTime)
+          nodeTime = 1
+       
+        elapsedTime = endTime - startTime
+
+        date_format_iso =(date) ->
+          date.toISOString().replace( /[T]/g, ' ').slice(0, -1)
+
+        hms =(ms) ->
+          date = new Date(ms);
+          str = '';
+          if date.getUTCDate()-1 > 0
+            str += date.getUTCDate()-1 + " days, ";
+          if date.getUTCHours > 0
+            str += date.getUTCHours() + " hours, ";
+          if date.getUTCMinutes() > 0
+            str += date.getUTCMinutes() + " minutes, ";
+          if date.getUTCSeconds() > 0
+            str += date.getUTCSeconds() + " seconds, ";
+          str += date.getUTCMilliseconds() + " millis";
+          str
+
+        dash = '\n---------------------------------------------------------------\n'
+        returnedStr = d.type + ':' + dash + 'URI: ' + d.name 
+        
+        if(nodeTime == 1)
+          returnedStr = returnedStr + dash + 'Start Time: ' + date_format_iso(startTime) + '\nEnd Time: ' + date_format_iso(endTime) + '\nElapsed Time: ' + hms(elapsedTime) 
+      
+        returnedStr
 
       # set the text of the nodes
       # set their position
