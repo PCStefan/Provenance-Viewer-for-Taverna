@@ -15,3 +15,4 @@ database.yml
 public/uploads
 vendor/assets/bower_components
 .env
+tmp/*

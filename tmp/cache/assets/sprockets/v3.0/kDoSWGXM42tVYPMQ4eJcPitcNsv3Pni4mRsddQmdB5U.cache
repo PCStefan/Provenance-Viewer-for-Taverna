@@ -1,7 +1,0 @@
-I"O(function() {
-  $(function() {
-    draw_workflow();
-  });
-
-}).call(this);
-:ET
