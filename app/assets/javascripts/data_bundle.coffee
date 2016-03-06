@@ -98,7 +98,10 @@ $(document).ready ->
 
   draw_sankey = ->
     width = 1042
-    height = 505
+    height = 675
+    lowOpacity = 0.3
+    highOpacity = 0.7
+
 
     # load the svg#sankeyContainer
     # set the width and height attributes
@@ -108,7 +111,7 @@ $(document).ready ->
     # define the sankey object 
     # set the node width to 15
     # set the node padding to 10
-    sankey = d3.sankey().nodeWidth(15).nodePadding(5).size([width, height/2])
+    sankey = d3.sankey().nodeWidth(15).nodePadding(10).size([width, height])
 
     # request the sankey path of current sankey   
     path = sankey.link()
@@ -130,16 +133,25 @@ $(document).ready ->
       # set the nodes
       # set the links
       # set the layout
-      sankey.nodes(data.provenance.nodes).links(data.provenance.links).layout 16
+      sankey.nodes(data.provenance.nodes).links(data.provenance.links).layout 32
 
       # select all the links from the json-data and append them to the Sankey obj in alphabetical order 
       link = svg.append('g').selectAll('.link').data(data.provenance.links).enter().append('path').attr('class', 'link').attr('d', path).style('stroke-width', (d) ->
-        Math.max 1, d.dy/5).sort((a, b) ->
+        Math.max 5, d.dy).sort((a, b) ->
           b.dy - (a.dy))
+
+      link.attr('fill', (d) ->
+        stringTextForColor = d.source.type + "stefan" + d.target.type   
+        d.color = color(stringTextForColor.replace(RegExp(' .*'), ''))
+        ).attr('opacity', lowOpacity).on('mouseover', (d) ->
+          d3.select(this).style('opacity', highOpacity)
+          ).on('mouseout', (d) ->
+            d3.select(this).style('opacity', lowOpacity)
+            )
 
       # set the text for the edges
       link.append('title').text (d) ->
-        d.source.name + ' → ' + d.target.name + '\n' + format(d.value)
+        d.source.type + ': ' + d.source.name + '\n → \n' + d.target.type + ': ' +  d.target.name
 
       # create the function to drag the node 
       dragmove = (d) ->
@@ -167,27 +179,31 @@ $(document).ready ->
       # set the width of the rectangle to nodeWidth?
       # set the style to be filled with default color
       node.append('rect').attr('height', (d) ->
-        d.dy
+        Math.max 25, d.dy
       ).attr('width', sankey.nodeWidth()).style('fill', (d) ->
-        d.color = color(d.name.replace(RegExp(' .*'), ''))
+        d.color = color(d.type.replace(RegExp(' .*'), ''))
       ).style('stroke', (d) ->
-        d3.rgb(d.color).darker 2
+        d3.rgb(d.color).darker 1
       ).append('title').text (d) ->
-        d.name + '\n' + format(d.value)
+        d.type + ':  ' + d.name 
 
       # set the text of the nodes
       # set their position
       # set their font
       # set the anchor of the text
       node.append('text').attr('x', (d) ->
-        -(d.dy/2)
+        d.dx/2 - 9
       ).attr('y', (d) ->
-        -(d.dx/2 - 4)
-      ).attr('text-anchor', 'middle').attr('transform', 'rotate(270)').text((d) ->
-        d.name
+        d.dy/2 + 5
+      ).attr('text-anchor', 'end')
+      .text((d) ->
+        if d.name.length > 32
+          d.name.substring(0, 15) + '..' + d.name.substring(d.name.length - 15, d.name.length)
+        else
+          d.name
       ).filter((d) ->
         d.x < width / 5
-      ).attr('y', "27").attr('text-anchor', 'middle')
+      ).attr('x', "15").attr('text-anchor', 'start')
       return
 
   if(diagramType == 'Sankey')

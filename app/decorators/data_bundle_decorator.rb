@@ -94,31 +94,8 @@ class DataBundleDecorator < Draper::Decorator
   def provenanceMain
     
     if @provenance.nil?
+
       provenanceObj = Provenance.new("#{object.file_path}workflowrun.prov.ttl")
-
-      # @provenance = ""
-
-      # mainTaverna = provenanceObj.getThePrimaryTopic
-      # mainTaverna.each_solution do |result|
-      #   @provenance << "Primary Workflow: " << result["primary_topic"] << "\n"
-      #   @provenance << "Exported by (activity): "  << result["was_generated_by"] << "  "
-      #   @provenance << "associated with (agent): "  << result["associated_agent"] << "\n"
-      # end
-
-      # @provenance << "\nWorkflow Runs: \n"
-
-      # workflowruns = provenanceObj.getAllWorkflowRuns
-      # workflowruns.each_solution do |result|
-      #   @provenance << result["workflow_run"] << "\n"
-      # end
-
-      # @provenance << "\nProcess Runs :\n"
-
-      # processruns = provenanceObj.getAllProcessRuns
-      # processruns.each_solution do |result|
-      #   @provenance << result["process_run"] << "\n"
-      # end
-
       @provenance =  provenanceObj.to_json
 
     end # if provenance
