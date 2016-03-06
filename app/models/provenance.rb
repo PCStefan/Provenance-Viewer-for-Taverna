@@ -47,18 +47,14 @@ class Provenance
   def getAllWorkflowRuns
   	# create the query
 		sparql_query = SPARQL.parse("#{Provenance.prefixes}
-			SELECT ?workflowRun ?secondWorkflowRun
+			SELECT ?workflowRun ?wasPartOfWorkflowRun
 			WHERE
 			{ ?workflowRun	rdf:type	wfprov:WorkflowRun	.
 		    OPTIONAL
 	      { 
-	      	?workflowRun	wfprov:wasPartOfWorkflowRun	?secondWorkflowRun .
+	      	?workflowRun	wfprov:wasPartOfWorkflowRun	?wasPartOfWorkflowRun .
 	      }
 		  }")
-
-		p ";;;;;;;;;;;;;;;;;;;"
-		p sparql_query
-		p "lllllllllllllllllll"
 
 		#return the result of the performing the query
     sparql_query.execute(@graph)
@@ -92,14 +88,31 @@ class Provenance
   def getAllArtifacts
   	# create the query
 		sparql_query = SPARQL.parse("#{Provenance.prefixes}
-			SELECT ?artifactURI ?outputFrom
-			WHERE {
-				?artifactURI	rdf:type	wfprov:Artifact	.
-				OPTIONAL
-				{
-					?artifactURI	wfprov:wasOutputFrom	?outputFrom	.
-				}
-			}")
+			SELECT ?artifactURI ?outputFromWorkflowRun ?outputFromProcessRun ?dictionary ?hadMember
+      WHERE {
+        {
+          ?artifactURI  rdf:type  wfprov:Artifact .
+          OPTIONAL
+          {
+            ?artifactURI  wfprov:wasOutputFrom  ?outputFromWorkflowRun  .
+            ?outputFromWorkflowRun rdf:type  wfprov:WorkflowRun  .
+          }
+          OPTIONAL
+          {
+            ?artifactURI  wfprov:wasOutputFrom  ?outputFromProcessRun .
+            ?outputFromProcessRun rdf:type  wfprov:ProcessRun .
+          }
+          FILTER (NOT EXISTS {?artifactURI  rdf:type  prov:Dictionary . } ) 
+        }
+        UNION
+        {
+          ?dictionary  rdf:type prov:Dictionary .
+          OPTIONAL
+          {
+            ?dictionary  prov:hadMember ?hadMember .
+          }
+        }
+      }")
 
 		# return the result of the performing the query
     sparql_query.execute(@graph)
@@ -126,19 +139,12 @@ class Provenance
   		if indexSource.blank?
   			indexSource = nodes.count
   			nodes << workflowRun
-  			p "Workflow Node Added:  #{workflowRun}"
   		end
 
-  		p "RESULTS : #{result.inspect}"
-
   		# check if has property wasPartOfWorkflowRun 
-  		if result["wasPartOfWorkflow"].present?
+  		if result["wasPartOfWorkflowRun"].present?
 
   			secondWorkflowRun = {:name => result["wasPartOfWorkflowRun"].to_s, :type => "Workflow Run"}
-
-  			p "Workflow Node 1:  #{workflowRun}"
-  			p "link"
-  			p "workflow Node :  #{secondWorkflowRun}"
 
   			indexTarget = nodes.find_index(secondWorkflowRun)
 
@@ -149,7 +155,7 @@ class Provenance
 
   			# add the link
   			linkWfToWf = {:source => indexSource, :target => indexTarget, :value => "50"}
-  			if linkWfToWf.blank?
+  			if links.find_index(linkWfToWf).blank?
   				links << linkWfToWf
   			end
   		end
@@ -187,11 +193,11 @@ class Provenance
 
   			# add the link
   			linkProcessToWf = {:source => indexSource, :target => indexTarget, :value => "50"}
-  			if linkProcessToWf.blank?
+  			if links.find_index(linkProcessToWf).blank?
   				links << linkProcessToWf
   			end
   		end
-
+      
   		# check if has property usedInput 
   		if result["usedInput"].present?
   			artifact = {:name => result["usedInput"].to_s, :type => "Artifact"}
@@ -205,7 +211,7 @@ class Provenance
 
   			# add the link
   			linkProcessToArtifact = {:source => indexSource, :target => indexTarget, :value => "50"}
-  			if linkProcessToArtifact.blank?
+  			if links.find_index(linkProcessToArtifact).blank?
   				links << linkProcessToArtifact
   			end
   		end
@@ -221,9 +227,9 @@ class Provenance
   				nodes << engine
   			end
 
-  			# add the link
+        # add the link
   			linkProcessToEngine = {:source => indexSource, :target => indexTarget, :value => "50"}
-  			if linkProcessToEngine.blank?
+  			if links.find_index(linkProcessToEngine).blank?
   				links << linkProcessToEngine
   			end
   		end
@@ -234,11 +240,19 @@ class Provenance
   	# get all the nodes and links related to the artifact
   	getAllArtifacts.each do |result|
   		
-  		# get the name
-  		artifactURI = result["artifactURI"].to_s
+      if result["artifactURI"].present?
+    		# get the name
+    		artifactURI = result["artifactURI"].to_s
 
-  		# the node that need to be added to the nodes
-  		artifact = {:name => artifactURI, :type => "Artifact"}
+    		# the node that need to be added to the nodes
+    		artifact = {:name => artifactURI, :type => "Artifact"}
+      else
+        # get the name
+        artifactURI = result["dictionary"].to_s
+
+        # the node that need to be added to the nodes
+        artifact = {:name => artifactURI, :type => "Dictionary"}
+      end
 
   		# get the index of the artifact if present otherwise nil
   		indexSource = nodes.find_index(artifact)
@@ -250,8 +264,8 @@ class Provenance
   		end
 
   		# check if it has the property wasOutputFrom a process Run and add a link entity-process
-  		if result["outputFrom"].present?
-				processRun = {:name => result["outputFrom"].to_s, :type => "Process Run"}
+  		if result["outputFromProcessRun"].present?
+				processRun = {:name => result["outputFromProcessRun"].to_s, :type => "Process Run"}
 		
 				indexTarget = nodes.find_index(processRun)
 
@@ -266,6 +280,40 @@ class Provenance
   				links << linkArtifactToProcess
   			end
   		end
+
+      if result["outputFromWorkflowRun"].present?
+        workflowRun = {:name => result["outputFromWorkflowRun"].to_s, :type => "Workflow Run"}
+    
+        indexTarget = nodes.find_index(workflowRun)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << workflowRun
+        end
+
+        # add the link
+        linkArtifactToWorkflow = {:source => indexSource, :target => indexTarget, :value => "50"}
+        if links.find_index(linkArtifactToWorkflow).blank?
+          links << linkArtifactToWorkflow
+        end
+      end
+
+      if result["hadMember"].present?
+        artifact = {:name => result["hadMember"].to_s, :type => "Artifact"}
+    
+        indexTarget = nodes.find_index(artifact)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << artifact
+        end
+
+        # add the link
+        linkDictToArtifact = {:source => indexSource, :target => indexTarget, :value => "50"}
+        if links.find_index(linkDictToArtifact).blank?
+          links << linkDictToArtifact
+        end
+      end
 		end
 
 		# make a hash to return

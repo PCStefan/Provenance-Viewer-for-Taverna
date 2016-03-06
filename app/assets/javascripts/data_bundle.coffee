@@ -98,7 +98,7 @@ $(document).ready ->
 
   draw_sankey = ->
     width = 1042
-    height = 675
+    height = 800
     lowOpacity = 0.3
     highOpacity = 0.7
 
@@ -111,7 +111,7 @@ $(document).ready ->
     # define the sankey object 
     # set the node width to 15
     # set the node padding to 10
-    sankey = d3.sankey().nodeWidth(15).nodePadding(10).size([width, height])
+    sankey = d3.sankey().nodeWidth(15).nodePadding(15).size([width, height])
 
     # request the sankey path of current sankey   
     path = sankey.link()
@@ -166,7 +166,9 @@ $(document).ready ->
       # select all the nodes from the json-data and append them to the Sankey obj
       # add behavior : dragmove
       node = svg.append('g').selectAll('.node').data(data.provenance.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
-          'translate(' + d.x + ',' + d.y + ')'
+          yValue = Math.min d.y, (height - 25)
+
+          'translate(' + d.x + ',' + yValue + ')'
           ).call(d3.behavior.drag().origin((d) ->
             d
           ).on('dragstart', ->

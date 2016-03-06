@@ -63,9 +63,6 @@ gem 'ruby-graphviz'
 # A gem to query the prov.ttl
 gem 'sparql'
 
-# taverna t2-flow has rdf-turtle as dependency
-#gem 'rdf-turtle', github: 'ruby-rdf/rdf-turtle'
-
 # A simple interface to working with ZIP archives
 gem 'archive-zip'
 # Paginator
