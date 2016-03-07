@@ -62,26 +62,27 @@ class Provenance
   # Get all the ProcessRuns and their outlinks
   def getAllProcessRuns
   	sparql_query = SPARQL.parse("#{Provenance.prefixes}		
-      SELECT  *
+      SELECT  ?processURI ?wasPartOfWorkflow ?usedDictionaryInput ?usedArtifactInput ?startedAtTime ?endedAtTime ?engineUsed
       WHERE
       { 
-        ?processURI  rdf:type         wfprov:ProcessRun ;
-                     prov:startedAtTime  ?startedAtTime ;
-                     prov:endedAtTime    ?endedAtTime
+        ?processURI  rdf:type          wfprov:ProcessRun ;
+                  prov:startedAtTime   ?startedAtTime ;
+                  prov:endedAtTime     ?endedAtTime ;
+                  wfprov:wasEnactedBy  ?engineUsed
         OPTIONAL
           { ?processURI  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflow }
         OPTIONAL
         { 
-          ?processURI  wfprov:usedInput  ?usedArtifactInput
-          FILTER NOT EXISTS { ?usedArtifactInput  rdf:type  prov:Dictionary  }
-        }
-        OPTIONAL
-        { 
+          {
           ?processURI  wfprov:usedInput  ?usedDictionaryInput .
           ?usedDictionaryInput  rdf:type  prov:Dictionary
+          }
+          UNION
+          {         
+            ?processURI  wfprov:usedInput  ?usedArtifactInput
+            FILTER NOT EXISTS { ?usedArtifactInput  rdf:type  prov:Dictionary }
+          }        
         }
-        OPTIONAL
-          { ?processURI  wfprov:wasEnactedBy  ?engineUsed }
       }")
 
   	# return the processes that were used
@@ -115,7 +116,17 @@ class Provenance
         { 
           ?dictionary  rdf:type  prov:Dictionary
           OPTIONAL
-            { ?dictionary  prov:hadMember  ?hadMember }
+          { 
+            {
+              ?dictionary  prov:hadMember  ?hadMemberDictionary  .
+              ?hadMemberDictionary  rdf:type  prov:Dictionary
+            }
+            UNION
+            {
+              ?dictionary  prov:hadMember  ?hadMemberArtifact  .
+              FILTER NOT EXISTS { ?hadMemberArtifact  rdf:type  prov:Dictionary }
+            }
+          }
           OPTIONAL
           { 
             ?dictionary  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
@@ -182,6 +193,9 @@ class Provenance
   	# get all the workflows
   	getAllProcessRuns.each do |result|
 
+      p result.inspect
+      p "-------------"
+
   		# get the name
   		processRunURI = result["processURI"].to_s
 
@@ -214,7 +228,7 @@ class Provenance
   				links << linkProcessToWf
   			end
   		end
-      
+
   		# check if has property usedInput 
   		if result["usedArtifactInput"].present?
   			artifact = {:name => result["usedArtifactInput"].to_s, :type => "Artifact" }
@@ -335,8 +349,8 @@ class Provenance
         end
       end
 
-      if result["hadMember"].present?
-        artifact = {:name => result["hadMember"].to_s, :type => "Artifact"}
+      if result["hadMemberArtifact"].present?
+        artifact = {:name => result["hadMemberArtifact"].to_s, :type => "Artifact"}
     
         indexTarget = nodes.find_index(artifact)
 
@@ -349,6 +363,23 @@ class Provenance
         linkDictToArtifact = {:source => indexSource, :target => indexTarget, :value => "50"}
         if links.find_index(linkDictToArtifact).blank?
           links << linkDictToArtifact
+        end
+      end
+
+      if result["hadMemberDictionary"].present?
+        dictionary = {:name => result["hadMemberDictionary"].to_s, :type => "Dictionary"}
+    
+        indexTarget = nodes.find_index(dictionary)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << dictionary
+        end
+
+        # add the link
+        linkDictToDict = {:source => indexSource, :target => indexTarget, :value => "50"}
+        if links.find_index(linkDictToDict).blank?
+          links << linkDictToDict
         end
       end
 		end
