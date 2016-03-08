@@ -114,7 +114,7 @@ $(document).ready ->
     sankey = d3.sankey().nodeWidth(15).nodePadding(15).size([width, height])
 
     # request the sankey path of current sankey   
-    path = sankey.link()
+    path = sankey.reversibleLink()
 
     # load data to work with
     # function (error, links) will be defined after that $('#data_bundle').attr('data-url') will be requested and accepted  
@@ -133,16 +133,27 @@ $(document).ready ->
       # set the nodes
       # set the links
       # set the layout
-      sankey.nodes(data.provenance.nodes).links(data.provenance.links).layout 32
+      sankey.nodes(data.provenance.nodes).links(data.provenance.links).layout(500)
 
       # select all the links from the json-data and append them to the Sankey obj in alphabetical order 
-      link = svg.append('g').selectAll('.link').data(data.provenance.links).enter().append('path').attr('class', 'link').attr('d', path).style('stroke-width', (d) ->
-        Math.max 5, d.dy).sort((a, b) ->
+      link = svg.append('g').selectAll('.link').data(data.provenance.links).enter().append('g').attr('class', 'link').sort((a, b) ->
           b.dy - (a.dy))
 
+      p0 = link.append("path").attr("d", path(0))
+      p1 = link.append("path").attr("d", path(1))
+      p2 = link.append("path").attr("d", path(2))
+
       link.attr('fill', (d) ->
-        stringTextForColor = d.source.type + "stefan" + d.target.type   
-        d.color = color(stringTextForColor.replace(RegExp(' .*'), ''))
+
+        colorType = undefined
+        switch d.source.type
+          when 'Workflow Run' then colorType = '#0eff7f'
+          when 'Process Run' then colorType = '#1f77b4'
+          when 'Artifact' then colorType = '#ff7f0e'
+          when 'Dictionary' then colorType = '#7f0eff'
+          else colorType = color(stringTextForColor.replace(RegExp(' .*'), ''))        
+
+        d.color = colorType
         ).attr('opacity', lowOpacity).on('mouseover', (d) ->
           d3.select(this).style('opacity', highOpacity)
           ).on('mouseout', (d) ->
@@ -162,7 +173,9 @@ $(document).ready ->
         #d3.select(this).attr('transform', 'translate(' + d.x + ',' + (d.y = Math.max(0, Math.min(height - (d.dy), d3.event.y))) + ')')
         d3.select(this).attr('transform', 'translate(' + (d.x = Math.max(0, Math.min(width - (d.dx), d3.event.x))) + ',' + (d.y = Math.max(0, Math.min(height - (d.dy), d3.event.y))) + ')')
         sankey.relayout()
-        link.attr('d', path)
+        p0.attr("d", path(1))
+        p1.attr("d", path(0))
+        p2.attr("d", path(2))
         return
 
 
@@ -170,6 +183,8 @@ $(document).ready ->
       # add behavior : dragmove
       node = svg.append('g').selectAll('.node').data(data.provenance.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
           yValue = Math.min d.y, (height - 25)
+
+          yValue
 
           'translate(' + d.x + ',' + yValue + ')'
           ).call(d3.behavior.drag().origin((d) ->
@@ -184,9 +199,17 @@ $(document).ready ->
       # set the width of the rectangle to nodeWidth?
       # set the style to be filled with default color
       node.append('rect').attr('height', (d) ->
-        Math.max 25, d.dy
+        Math.max 15, d.dy
       ).attr('width', sankey.nodeWidth()).style('fill', (d) ->
-        d.color = color(d.type.replace(RegExp(' .*'), ''))
+        colorType = undefined
+        switch d.type
+          when 'Workflow Run' then colorType = '#0eff7f'
+          when 'Process Run' then colorType = '#1f77b4'
+          when 'Artifact' then colorType = '#ff7f0e'
+          when 'Dictionary' then colorType = '#7f0eff'
+          else colorType = color(stringTextForColor.replace(RegExp(' .*'), ''))        
+
+        d.color = colorType
       ).style('stroke', (d) ->
         d3.rgb(d.color).darker 1
       ).append('title').text (d) ->
@@ -225,6 +248,26 @@ $(document).ready ->
       
         returnedStr
 
+      # create function that to split the text into multiple lines
+      wrap = (text) ->
+        text.each ->
+          text = d3.select(this)
+          labels = text.text().split("\\n")
+          dy = 0
+          text.text(null)
+
+          line = []
+          lineNumber = 0
+          lineHeight = 1.1
+          for temp in labels
+            lineNumber++
+            text.append('tspan').attr('x', text.attr('x')).attr('y', text.attr('y')).attr('dy', lineNumber * lineHeight + dy + 'em' ).text(temp).filter((d) ->
+              d.x < width / 5
+            ).attr('x', "16")
+
+          return
+        return
+
       # set the text of the nodes
       # set their position
       # set their font
@@ -232,16 +275,23 @@ $(document).ready ->
       node.append('text').attr('x', (d) ->
         d.dx/2 - 9
       ).attr('y', (d) ->
-        d.dy/2 + 5
+        d.dy/2 
       ).attr('text-anchor', 'end')
       .text((d) ->
-        if d.name.length > 32
-          d.name.substring(0, 15) + '..' + d.name.substring(d.name.length - 15, d.name.length)
+        
+        shortenString =(temp) ->
+          if temp.length > 32
+            temp = temp.substring(0, 15) + '..' + temp.substring(temp.length - 15, temp.length)
+          temp
+
+        if d.hasOwnProperty("label")
+          d.label 
         else
-          d.name
-      ).filter((d) ->
+          shortenString(d.name)
+      ).call(wrap).filter((d) ->
         d.x < width / 5
-      ).attr('x', "15").attr('text-anchor', 'start')
+      ).attr('x', "16").attr('text-anchor', 'start')
+
       return
 
   if(diagramType == 'Sankey')

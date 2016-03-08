@@ -20,15 +20,11 @@
 class DataBundleDecorator < Draper::Decorator
   delegate_all
 
-  FILE_TYPES = {
-      inputs: '/inputs/',
-      intermediates: '/intermediates/',
-      outputs: '/outputs/'
-  }
+  FILE_TYPES = {:inputs => '/inputs/' , :intermediates => '/intermediates/', :outputs => 'outputs'}
 
   FILE_TYPES.each do |type_key, type_name|
     define_method :"#{type_key}" do
-      files = manifest['aggregates'].select { |files| files['folder'].start_with?(type_name) }
+      files = manifest['aggregates'].select { |file| !file['folder'].nil? && file['folder'].start_with?(type_name) }
       result = {}
       files.each do |file|
         key = file['file'].split('/').last.split('.').first
