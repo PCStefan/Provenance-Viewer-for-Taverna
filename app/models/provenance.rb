@@ -132,15 +132,6 @@ class Provenance
             {
               ?dictionary  prov:hadMember  ?hadMemberDictionary  .
               ?hadMemberDictionary  rdf:type  prov:Dictionary .
-              OPTIONAL
-              {
-                ?hadMemberDictionary  wfprov:describedByParameter  ?describedByParameter  .
-                OPTIONAL
-                {
-                  ?describedByParameter wfprov:describedByParameter ?commentURI .
-                  ?commentURI rdfs:comment ?comment
-                } 
-              }
             }
             UNION
             {
@@ -415,20 +406,40 @@ class Provenance
       end
 
       if result["hadMemberArtifact"].present?
-        artifact = {:name => result["hadMemberArtifact"].to_s, :type => "Artifact"}
-    
-        indexTarget = nodes.find_index(artifact)
+        memberArtifact = {:name => result["hadMemberArtifact"].to_s, :type => "Artifact"}
+        
+        indexTarget = -1
 
-        if indexTarget.blank?
+        nodes.each_with_index do |node, index|
+          if node[:type].to_s == memberArtifact[:type].to_s
+            if node[:name].to_s == memberArtifact[:name].to_s
+              indexTarget = index
+            end
+          end
+        end
+
+        if indexTarget == -1
+          if result["comment"].present?
+            artifactLabel = result["comment"].to_s
+            memberArtifact.merge!(:label => artifactLabel)
+          end
           indexTarget = nodes.count
-          nodes << artifact
+          nodes << memberArtifact
         end
 
         # add the link
-        linkDictToArtifact = {:source => indexSource, :target => indexTarget, :value => linkValue}
-        if links.find_index(linkDictToArtifact).blank?
-          links << linkDictToArtifact
+        if result["outputFromProcessRun"].present?
+          linkDictToArtifact = {:source => indexSource, :target => indexTarget, :value => linkValue}
+          if links.find_index(linkDictToArtifact).blank?
+            links << linkDictToArtifact
+          end
+        else
+          linkDictToArtifact = {:source => indexTarget, :target => indexSource, :value => linkValue}
+          if links.find_index(linkDictToArtifact).blank?
+            links << linkDictToArtifact
+          end
         end
+      
       end
 
       if result["hadMemberDictionary"].present?
@@ -442,7 +453,7 @@ class Provenance
         end
 
         # add the link
-        linkDictToDict = {:source => indexSource, :target => indexTarget, :value => linkValue}
+        linkDictToDict = {:source => indexTarget, :target => indexSource, :value => linkValue}
         if links.find_index(linkDictToDict).blank?
           links << linkDictToDict
         end

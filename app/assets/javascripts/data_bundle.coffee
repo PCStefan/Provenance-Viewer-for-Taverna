@@ -45,7 +45,7 @@
       height = 900
 
       force = d3.layout.force().nodes(d3.values(nodes)).links(links.workflow).size([width, height])
-      .linkDistance(100).charge(-500).on('tick', tick).start()
+      .linkDistance(200).charge(-500).on('tick', tick).start()
       svgContainer = d3.select('svg#graphContainer').attr('width', width).attr('height', height)
 
       # build the arrow.
@@ -106,12 +106,12 @@ $(document).ready ->
     # load the svg#sankeyContainer
     # set the width and height attributes
     # append a function g that has a tranform process defined by translation
-    svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g')
+    svg = d3.select('svg#provContainer').attr('width', width+150).attr('height', height+150).append('g')
 
     # define the sankey object 
     # set the node width to 15
     # set the node padding to 10
-    sankey = d3.sankey().nodeWidth(15).nodePadding(15).size([width, height])
+    sankey = d3.sankey().nodeWidth(20).nodePadding(10).size([width, height])
 
     # request the sankey path of current sankey   
     path = sankey.reversibleLink()
@@ -133,7 +133,8 @@ $(document).ready ->
       # set the nodes
       # set the links
       # set the layout
-      sankey.nodes(data.provenance.nodes).links(data.provenance.links).layout(500)
+      sankey.nodes(data.provenance.nodes).links(data.provenance.links)
+      sankey.layout(800)
 
       # select all the links from the json-data and append them to the Sankey obj in alphabetical order 
       link = svg.append('g').selectAll('.link').data(data.provenance.links).enter().append('g').attr('class', 'link').sort((a, b) ->
@@ -182,10 +183,7 @@ $(document).ready ->
       # select all the nodes from the json-data and append them to the Sankey obj
       # add behavior : dragmove
       node = svg.append('g').selectAll('.node').data(data.provenance.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
-          yValue = Math.min d.y, (height - 25)
-
-          yValue
-
+          yValue = Math.min(d.y, (height - 25))
           'translate(' + d.x + ',' + yValue + ')'
           ).call(d3.behavior.drag().origin((d) ->
             d
@@ -199,7 +197,7 @@ $(document).ready ->
       # set the width of the rectangle to nodeWidth?
       # set the style to be filled with default color
       node.append('rect').attr('height', (d) ->
-        Math.max 15, d.dy
+        Math.max 10, d.dy
       ).attr('width', sankey.nodeWidth()).style('fill', (d) ->
         colorType = undefined
         switch d.type
@@ -212,7 +210,7 @@ $(document).ready ->
         d.color = colorType
       ).style('stroke', (d) ->
         d3.rgb(d.color).darker 1
-      ).append('title').text (d) ->
+      ).append('title').text((d) ->
         startTime = new Date()
         endTime = new Date()
         nodeTime = 0
@@ -247,6 +245,21 @@ $(document).ready ->
           returnedStr = returnedStr + dash + 'Start Time: ' + date_format_iso(startTime) + '\nEnd Time: ' + date_format_iso(endTime) + '\nElapsed Time: ' + hms(elapsedTime) 
       
         returnedStr
+      )
+
+      # hide the links that are targeted at current node
+      node.on('dblclick', (d) ->
+        svg.selectAll('.link').filter((l) ->
+          l.target == d
+        ).attr('display', ->
+          if d3.select(this).attr('display') == 'none'
+            'inline'
+          else
+            'none'
+        )
+        return
+      )
+
 
       # create function that to split the text into multiple lines
       wrap = (text) ->
@@ -278,7 +291,6 @@ $(document).ready ->
         d.dy/2 
       ).attr('text-anchor', 'end')
       .text((d) ->
-        
         shortenString =(temp) ->
           if temp.length > 32
             temp = temp.substring(0, 15) + '..' + temp.substring(temp.length - 15, temp.length)

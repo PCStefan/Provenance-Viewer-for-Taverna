@@ -46,7 +46,7 @@ d3.sankey = function() {
 
     computeNodeDepths(iterations);
     computeLinkDepths();
-    
+
     return sankey;
   };
 
@@ -121,6 +121,7 @@ d3.sankey = function() {
     //                 Source--/
     //
     function backwardLink(part, d) {
+
       var curveExtension = 30;
       var curveDepth = 15;
 
@@ -197,11 +198,14 @@ d3.sankey = function() {
           x3 = xi(1 - curvature),
           y0 = d.source.y + d.sy + d.dy / 2,
           y1 = d.target.y + d.ty + d.dy / 2;
+
       return "M" + x0 + "," + y0
            + "C" + x2 + "," + y0
            + " " + x3 + "," + y1
            + " " + x1 + "," + y1;
     }
+
+
 
     link.curvature = function(_) {
       if (!arguments.length) return curvature;
@@ -254,6 +258,7 @@ d3.sankey = function() {
       if (!node.index) {
         connect(node);
       }
+      
     });
 
     function connect(node) {
@@ -299,7 +304,7 @@ d3.sankey = function() {
   // Assign the breadth (x-position) for each strongly connected component,
   // followed by assigning breadth within the component.
   function computeNodeBreadths() {
-    
+
     layerComponents();
 
     components.forEach(function(component, i){
@@ -318,7 +323,7 @@ d3.sankey = function() {
     var max = 0;
     var componentsByBreadth = d3.nest()
       .key(function(d) { return d.x; })
-      .sortKeys(d3.ascending)
+      // .sortKeys(d3.ascending)
       .entries(components)
       .map(function(d) { return d.values; });
 
@@ -327,9 +332,12 @@ d3.sankey = function() {
       c.forEach(function(component){
         component.x = max + 1;
         component.scc.forEach(function(node){
-      if (node.layer) node.x=node.layer;
-          else node.x = component.x + node.x;
+          if (node.layer) 
+            node.x = node.layer;
+          else 
+            node.x = component.x + node.x;
           nextMax = Math.max(nextMax, node.x);
+
         });
       });
       max = nextMax;
