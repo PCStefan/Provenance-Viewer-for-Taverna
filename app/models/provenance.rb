@@ -109,6 +109,10 @@ class Provenance
                         wfprov:describedByParameter  ?describedByParameter  .
           ?describedByParameter  rdfs:comment  ?comment
           OPTIONAL
+          {
+            ?artifactURI  tavernaprov:content  ?filepath
+          }
+          OPTIONAL
           { 
             ?artifactURI  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
             ?outputFromWorkflowRun  rdf:type  wfprov:WorkflowRun ;
@@ -127,6 +131,10 @@ class Provenance
         UNION
         { 
           ?dictionary  rdf:type  prov:Dictionary
+          OPTIONAL
+          {
+            ?dictionary  tavernaprov:content  ?filepath
+          }
           OPTIONAL
           { 
             {
@@ -162,12 +170,35 @@ class Provenance
     sparql_query.execute(graph)
   end
 
-  def to_json
+  def getContentOf(extractedFilepath)
+    p "path : : :   #{extractedFilepath}"
+    content = ""
+
+    if File.directory?(extractedFilepath)
+      content = "[" 
+
+      # ffs = Files or Folders
+      #for each folder/file inside this folder do
+      ffs = Dir.glob(extractedFilepath + "/*")
+      for file in ffs
+        content = content + getContentOf("#{file}") + ", "
+      end
+
+      content = content[0...-2] + "]"
+
+    elsif File.file?(extractedFilepath)
+      content = File.read(extractedFilepath)
+    end
+
+    content
+  end
+
+  def to_json(bundle_filepath)
 
     nodes = []
     links = []
 
-    linkValue = "50"
+    linkValue = 50
     processorTrimCount = "Processor execution ".length
     workflowRunTrimCount = "Workflow run of ".length
 
@@ -177,9 +208,15 @@ class Provenance
       # get the name
       workflowRunURI = result["workflowRun"].to_s
       workflowRunLabel = result["workflowRunLabel"].to_s
+      if workflowRunLabel[0] == "W"
+        workflowRunLabel = workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]
+      elsif workflowRunLabel[0] == "P"
+        workflowRunLabel = workflowRunLabel[processorTrimCount, workflowRunLabel.length]
+      end
+
       # a temp node for current (Decide whether to be added or not)
       workflowRun = {:name => workflowRunURI, :type => "Workflow Run", 
-                     :label => workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]}
+                     :label => workflowRunLabel}
 
       # see if exists
       indexSource = nodes.find_index(workflowRun)
@@ -194,8 +231,13 @@ class Provenance
       if result["wasPartOfWorkflowRun"].present?
 
         secondWorkflowRunLabel = result["wasPartOfWorkflowRunLabel"].to_s
+        if secondWorkflowRunLabel[0] == "W"
+          secondWorkflowRunLabel = secondWorkflowRunLabel[workflowRunTrimCount, secondWorkflowRunLabel.length]
+        elsif secondWorkflowRunLabel[0] == "P"
+          secondWorkflowRunLabel = secondWorkflowRunLabel[processorTrimCount, secondWorkflowRunLabel.length]
+        end
         secondWorkflowRun = {:name => result["wasPartOfWorkflowRun"].to_s, :type => "Workflow Run",
-                             :label => secondWorkflowRunLabel[workflowRunTrimCount, secondWorkflowRunLabel.length]}
+                             :label => secondWorkflowRunLabel}
 
         indexTarget = nodes.find_index(secondWorkflowRun)
 
@@ -238,8 +280,15 @@ class Provenance
       if result["wasPartOfWorkflow"].present?
 
         workflowRunLabel = result["wasPartOfWorkflowLabel"].to_s
+        if workflowRunLabel[0] == "W"
+          workflowRunLabel = workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]
+        elsif workflowRunLabel[0] == "P"
+          workflowRunLabel = workflowRunLabel[processorTrimCount, workflowRunLabel.length]
+        end
+
+
         workflowRun = {:name => result["wasPartOfWorkflow"].to_s, :type => "Workflow Run", 
-                       :label => workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]}
+                       :label => workflowRunLabel}
 
         indexTarget = nodes.find_index(workflowRun)
 
@@ -321,13 +370,13 @@ class Provenance
         # get the name
         artifactURI = result["artifactURI"].to_s
 
-        # the node that need to be added to the nodes
+        # the node that needs to be added to the nodes
         artifact = {:name => artifactURI, :type => "Artifact"}
       else
         # get the name
         artifactURI = result["dictionary"].to_s
 
-        # the node that need to be added to the nodes
+        # the node that needs to be added to the nodes
         artifact = {:name => artifactURI, :type => "Dictionary"}
       end
 
@@ -349,6 +398,11 @@ class Provenance
             else
               node.merge!(:label => artifactLabel)
             end
+
+            if !(node[:content].present?) and result["filepath"].present?
+                artifactContent = getContentOf("#{bundle_filepath}#{result["filepath"].to_s}")
+                node[:content] = artifactContent
+            end
           end
         end
       end
@@ -361,6 +415,12 @@ class Provenance
           artifactLabel = result["comment"].to_s
         end
         artifact[:label] = artifactLabel
+
+        artifactContent = ""
+        if result["filepath"].present?
+          artifactContent = getContentOf("#{bundle_filepath}#{result["filepath"].to_s}")
+          artifact[:content] = artifactContent
+        end
         nodes << artifact
       end
 
@@ -388,8 +448,15 @@ class Provenance
 
       if result["outputFromWorkflowRun"].present?
         workflowRunLabel = result["outputFromWorkflowRunLabel"].to_s
+
+        if workflowRunLabel[0] == "W"
+          workflowRunLabel = workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]
+        elsif workflowRunLabel[0] == "P"
+          workflowRunLabel = workflowRunLabel[processorTrimCount, workflowRunLabel.length]
+        end
+
         workflowRun = {:name => result["outputFromWorkflowRun"].to_s, :type => "Workflow Run",
-                       :label => workflowRunLabel[workflowRunTrimCount, workflowRunLabel.length]}
+                       :label => workflowRunLabel}
     
         indexTarget = nodes.find_index(workflowRun)
 

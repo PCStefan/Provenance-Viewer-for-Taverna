@@ -61,7 +61,10 @@ class DataBundleDecorator < Draper::Decorator
 
   def to_json
     stream = []
-    workflow.datalinks.each { |link| stream << write_link(link, workflow) }
+
+    workflow.datalinks.each do |link|
+      stream << write_link(link, workflow) 
+    end
     stream
   end
 
@@ -85,6 +88,8 @@ class DataBundleDecorator < Draper::Decorator
     dataflow.processors.select { |p| p.name == name.split(':').first }.first.name
   end
 
+
+
   # find the provenance file
   # how to extract info from file see http://ruby-rdf.github.io/ , section Querying RDF data using basic graph patterns
   def provenanceMain
@@ -92,7 +97,25 @@ class DataBundleDecorator < Draper::Decorator
     if @provenance.nil?
 
       provenanceObj = Provenance.new("#{object.file_path}workflowrun.prov.ttl")
-      @provenance =  provenanceObj.to_json
+      @provenance =  provenanceObj.to_json("#{object.file_path}")
+
+      # stream = {}
+      # nodes = []
+      # links = []
+
+      # iteration = 12
+
+      # iteration.times do |i|
+      #   nodes << {:name => i, :label => i, :type => "Artifact"}
+      # end 
+
+      # (iteration - 1).times do |i|
+      #   links << {:source => i, :target => i+1, :value => 50}
+      # end
+
+      # stream = {:nodes => nodes, :links => links }
+
+      # @provenance = stream
 
     end # if provenance
 

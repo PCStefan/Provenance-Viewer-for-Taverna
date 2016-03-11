@@ -116,10 +116,14 @@ $(document).ready ->
     # request the sankey path of current sankey   
     path = sankey.reversibleLink()
 
+
+
     # load data to work with
     # function (error, links) will be defined after that $('#data_bundle').attr('data-url') will be requested and accepted  
     d3.json $('#data_bundle').attr('data-url'), (error, data) ->
-      
+    
+      # console.log(JSON.stringify(data));
+
       # set some formats 
       # round(approximate) the floating point inside the value field 
       formatNumber = d3.format(',.0f')
@@ -211,38 +215,47 @@ $(document).ready ->
       ).style('stroke', (d) ->
         d3.rgb(d.color).darker 1
       ).append('title').text((d) ->
-        startTime = new Date()
-        endTime = new Date()
-        nodeTime = 0
-        if(d.hasOwnProperty("startedAtTime"))
-          startTime = new Date(d.startedAtTime)
-          endTime = new Date(d.endedAtTime)
-          nodeTime = 1
-       
-        elapsedTime = endTime - startTime
+        
+        getTimes =(d) ->
+          startTime = new Date()
+          endTime = new Date()
+          nodeTime = 0
+          if(d.hasOwnProperty("startedAtTime"))
+            startTime = new Date(d.startedAtTime)
+            endTime = new Date(d.endedAtTime)
+            nodeTime = 1
+         
+          elapsedTime = endTime - startTime
 
-        date_format_iso =(date) ->
-          date.toISOString().replace( /[T]/g, ' ').slice(0, -1)
+          date_format_iso =(date) ->
+            date.toISOString().replace( /[T]/g, ' ').slice(0, -1)
 
-        hms =(ms) ->
-          date = new Date(ms);
-          str = '';
-          if date.getUTCDate()-1 > 0
-            str += date.getUTCDate()-1 + " days, ";
-          if date.getUTCHours > 0
-            str += date.getUTCHours() + " hours, ";
-          if date.getUTCMinutes() > 0
-            str += date.getUTCMinutes() + " minutes, ";
-          if date.getUTCSeconds() > 0
-            str += date.getUTCSeconds() + " seconds, ";
-          str += date.getUTCMilliseconds() + " millis";
-          str
+          hms =(ms) ->
+            date = new Date(ms);
+            str = '';
+            if date.getUTCDate()-1 > 0
+              str += date.getUTCDate()-1 + " days, ";
+            if date.getUTCHours > 0
+              str += date.getUTCHours() + " hours, ";
+            if date.getUTCMinutes() > 0
+              str += date.getUTCMinutes() + " minutes, ";
+            if date.getUTCSeconds() > 0
+              str += date.getUTCSeconds() + " seconds, ";
+            str += date.getUTCMilliseconds() + " millis";
+            str
+
+          if nodeTime == 1
+            'Start Time: ' + date_format_iso(startTime) + '\nEnd Time: ' + date_format_iso(endTime) + '\nElapsed Time: ' + hms(elapsedTime)
+          else
+            ''
 
         dash = '\n---------------------------------------------------------------\n'
         returnedStr = d.type + ':' + dash + 'URI: ' + d.name 
         
-        if(nodeTime == 1)
-          returnedStr = returnedStr + dash + 'Start Time: ' + date_format_iso(startTime) + '\nEnd Time: ' + date_format_iso(endTime) + '\nElapsed Time: ' + hms(elapsedTime) 
+        if(d.type == "Process Run")
+          returnedStr = returnedStr + dash + getTimes(d)  
+        else if(d.type == "Artifact" || d.type == "Dictionary" && d.content)
+          returnedStr = returnedStr + dash + "Content :\n" + d.content  
       
         returnedStr
       )
