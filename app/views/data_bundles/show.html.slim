@@ -1,11 +1,8 @@
 section.content-header
   h1
-    = "DataBundle View: #{@data_bundle.name}"
+    = "#{link_to 'DataBundle: ', data_bundles_path}#{@data_bundle.name}".html_safe
 
 section.content
-  #back_btn
-    = link_to '<< Back', data_bundles_path
-
   .container-fluid
     .row-fluid
       .span8.well
@@ -57,7 +54,8 @@ section.content
                         a#diagramMiserables data-target="#provMiserable" data-toggle="tab" Miserables
                     .tab-content
                       .provCont
-                        svg#provContainer
+                        #mapContainer
+                          svg#provContainer
             - else
               .row No data to display
               br

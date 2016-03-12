@@ -171,7 +171,6 @@ class Provenance
   end
 
   def getContentOf(extractedFilepath)
-    p "path : : :   #{extractedFilepath}"
     content = ""
 
     if File.directory?(extractedFilepath)
@@ -193,7 +192,7 @@ class Provenance
     content
   end
 
-  def to_json(bundle_filepath)
+  def to_dataHashObject(bundle_filepath)
 
     nodes = []
     links = []
@@ -512,9 +511,21 @@ class Provenance
       if result["hadMemberDictionary"].present?
         dictionary = {:name => result["hadMemberDictionary"].to_s, :type => "Dictionary"}
     
-        indexTarget = nodes.find_index(dictionary)
+        indexTarget = -1
 
-        if indexTarget.blank?
+        nodes.each_with_index do |node, index|
+          if node[:type].to_s == dictionary[:type].to_s
+            if node[:name].to_s == dictionary[:name].to_s
+              indexTarget = index
+            end
+          end
+        end
+
+        if indexTarget == -1
+          # if result["comment"].present?
+          #   artifactLabel = result["comment"].to_s
+          #   memberArtifact.merge!(:label => artifactLabel)
+          # end
           indexTarget = nodes.count
           nodes << dictionary
         end

@@ -37,6 +37,5 @@
 #= require data_bundle
 
 $ ->
-  draw_workflow()
-  draw_provenance()
+  draw()
   return

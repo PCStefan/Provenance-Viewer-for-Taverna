@@ -25,6 +25,10 @@
   padding: 0px;
 }
 
+.container {
+  width: 90%;
+}
+
 .provCont {
   margin-top: 30px;
 }
@@ -62,7 +66,6 @@ svg {
 
   text {
     fill: #000;
-    font: 16px sans-serif;
     pointer-events: none;
   }
 
@@ -72,4 +75,17 @@ svg {
   .fill_text {
     fill: red !important;
   }
+}
+
+#mapContainer {
+  position: relative;
+  left:0px;
+  top:0px;
+  overflow : auto;
+  padding : 0px;
+  margin: 0px;
+}
+
+#save_data_bundle {
+  margin-left: -10px;
 }

@@ -59,7 +59,7 @@ class DataBundleDecorator < Draper::Decorator
     @workflow
   end
 
-  def to_json
+  def to_dataHashObject
     stream = []
 
     workflow.datalinks.each do |link|
@@ -97,7 +97,7 @@ class DataBundleDecorator < Draper::Decorator
     if @provenance.nil?
 
       provenanceObj = Provenance.new("#{object.file_path}workflowrun.prov.ttl")
-      @provenance =  provenanceObj.to_json("#{object.file_path}")
+      @provenance =  provenanceObj.to_dataHashObject("#{object.file_path}")
 
       # stream = {}
       # nodes = []

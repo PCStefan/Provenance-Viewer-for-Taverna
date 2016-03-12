@@ -17,6 +17,18 @@
 # under the License.
 #
 
+# for every type of activity call draw_provenance
+$(document).ready ->
+  $('#diagramType li a').click ->
+    # do something
+    draw_provenance($(this).text())
+    return
+  return
+
+@draw = ->
+  draw_workflow()
+  draw_provenance()
+
 @draw_workflow = ->
   if $('svg#graphContainer').length > 0
     d3.json $('#data_bundle').attr('data-url'), (error, links) ->
@@ -77,52 +89,56 @@
         .attr('x', 50).attr('y', 150).attr('fill', 'black')
       return
 
-
-# for every type of activity call draw_provenance
-$(document).ready ->
-  $('#diagramType li a').click ->
-    # do something
-    draw_provenance($(this).text())
-    return
-  return
-
 @draw_provenance =(diagramType) ->
 
   # if diagramType is undefined or null, as default assign the current active
-  if !diagramType?
-    diagramType = $('#diagramType li.active a').text()
-  
   # else clear the svg for the diagram
+
+  if !diagramType?
+    diagramType = $('#diagramType li.active a').text()  
   else
     d3.select("svg#provContainer").selectAll("*").remove();
 
-  draw_sankey = ->
-    width = 1042
-    height = 800
-    lowOpacity = 0.3
-    highOpacity = 0.7
+  if(diagramType == 'Sankey')
+    draw_sankey()
 
 
-    # load the svg#sankeyContainer
-    # set the width and height attributes
-    # append a function g that has a tranform process defined by translation
-    svg = d3.select('svg#provContainer').attr('width', width+150).attr('height', height+150).append('g')
+@draw_sankey = ->
+  width = 950
+  height = 750
+  lowOpacity = 0.3
+  highOpacity = 0.7
 
-    # define the sankey object 
-    # set the node width to 15
-    # set the node padding to 10
-    sankey = d3.sankey().nodeWidth(20).nodePadding(10).size([width, height])
+  # load the svg#sankeyContainer
+  # set the width and height attributes
+  # append a function g that has a tranform process defined by translation
+  svg = d3.select('svg#provContainer')
 
-    # request the sankey path of current sankey   
-    path = sankey.reversibleLink()
+  # define the sankey object 
+  # set the node width to 15
+  # set the node padding to 10
+  sankey = d3.sankey().nodeWidth(20).nodePadding(10)
+
+  # request the sankey path of current sankey   
+  path = sankey.reversibleLink()
+
+  # load data to work with
+  # function (error, links) will be defined after that $('#data_bundle').attr('data-url') will be requested and accepted  
+  d3.json $('#data_bundle').attr('data-url'), (error, data) ->
+  
+    # compute a better width and height for the container
+    nodesCount = Object.keys(data.provenance.nodes).length 
+    linksCount = Object.keys(data.provenance.links).length
+
+    if nodesCount > 0 or linksCount > 0
+      ratioLN = linksCount / nodesCount * 100
+      width = width + Math.floor( ratioLN * 3 )
+      height = height + Math.floor( ratioLN * 2 )
 
 
+      svg = svg.attr('width', width+150).attr('height', height+150).append('g')
 
-    # load data to work with
-    # function (error, links) will be defined after that $('#data_bundle').attr('data-url') will be requested and accepted  
-    d3.json $('#data_bundle').attr('data-url'), (error, data) ->
-    
-      # console.log(JSON.stringify(data));
+      sankey = sankey.size([width, height])
 
       # set some formats 
       # round(approximate) the floating point inside the value field 
@@ -167,8 +183,8 @@ $(document).ready ->
 
       # set the text for the edges
       link.append('title').text (d) ->
-        startText = d.source.type + ' → ' + d.target.type + '\n' + d.source.type + ':\nURI: ' +  d.source.name
         dash = '\n-----------------------------------------------------------\n'
+        startText = d.source.type + ' → ' + d.target.type + dash + d.source.type + ':\nURI: ' +  d.source.name
         endText = d.target.type + ':\nURI: ' + d.target.name
         startText + dash + endText
 
@@ -249,21 +265,33 @@ $(document).ready ->
           else
             ''
 
+        shortenString =(temp) ->
+          if temp.length > 500
+            temp = temp.substring(0, 499) + '..'
+          temp
+
         dash = '\n---------------------------------------------------------------\n'
-        returnedStr = d.type + ':' + dash + 'URI: ' + d.name 
+
+        returnedStr = d.type + ':'
+        returnedStr += dash 
+        returnedStr += 'URI: ' + d.name
+        returnedStr += dash 
+        returnedStr += d.label.split("\\n").join("\n")
         
+
         if(d.type == "Process Run")
-          returnedStr = returnedStr + dash + getTimes(d)  
+          returnedStr += dash + getTimes(d)  
         else if(d.type == "Artifact" || d.type == "Dictionary" && d.content)
-          returnedStr = returnedStr + dash + "Content :\n" + d.content  
+          returnedStr += dash + "Content :\n" + shortenString(d.content)  
       
+
         returnedStr
       )
 
-      # hide the links that are targeted at current node
+      # hide the links that are sourced from / targeted at current node
       node.on('dblclick', (d) ->
         svg.selectAll('.link').filter((l) ->
-          l.target == d
+          l.source == d
         ).attr('display', ->
           if d3.select(this).attr('display') == 'none'
             'inline'
@@ -279,17 +307,20 @@ $(document).ready ->
         text.each ->
           text = d3.select(this)
           labels = text.text().split("\\n")
-          dy = 0
           text.text(null)
 
           line = []
-          lineNumber = 0
+
+          lineNumber = 1
+          if(labels.length != 0)
+            lineNumber = (-1) * (Math.floor(labels.length / 2) - 1)
+
           lineHeight = 1.1
           for temp in labels
-            lineNumber++
-            text.append('tspan').attr('x', text.attr('x')).attr('y', text.attr('y')).attr('dy', lineNumber * lineHeight + dy + 'em' ).text(temp).filter((d) ->
+            text.append('tspan').attr('x', text.attr('x')).attr('y', text.attr('y')).attr('dy', lineNumber * lineHeight + 'em' ).text(temp).filter((d) ->
               d.x < width / 5
-            ).attr('x', "16")
+            ).attr('x', "22")
+            lineNumber++
 
           return
         return
@@ -299,9 +330,9 @@ $(document).ready ->
       # set their font
       # set the anchor of the text
       node.append('text').attr('x', (d) ->
-        d.dx/2 - 9
+        d.dx/2 - 12
       ).attr('y', (d) ->
-        d.dy/2 
+        d.dy/2 - 10
       ).attr('text-anchor', 'end')
       .text((d) ->
         shortenString =(temp) ->
@@ -315,10 +346,6 @@ $(document).ready ->
           shortenString(d.name)
       ).call(wrap).filter((d) ->
         d.x < width / 5
-      ).attr('x', "16").attr('text-anchor', 'start')
+      ).attr('x', "22").attr('text-anchor', 'start')
 
-      return
-
-  if(diagramType == 'Sankey')
-    draw_sankey()
-
+  return
