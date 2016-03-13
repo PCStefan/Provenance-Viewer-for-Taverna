@@ -57,6 +57,18 @@ class Provenance
           ?workflowRun  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflowRun  .
           ?wasPartOfWorkflowRun  rdfs:label ?wasPartOfWorkflowRunLabel
         }
+        OPTIONAL
+        {
+          {
+            ?workflowRun  wfprov:usedInput  ?usedDictionaryInput .
+            ?usedDictionaryInput  rdf:type  prov:Dictionary
+          }
+          UNION
+          {
+            ?workflowRun  wfprov:usedInput  ?usedArtifactInput
+            FILTER NOT EXISTS { ?usedArtifactInput  rdf:type  prov:Dictionary }
+          }
+        }
       }")
 
     #return the result of the performing the query
@@ -251,6 +263,43 @@ class Provenance
           links << linkWfToWf
         end
       end
+
+      # check if has property usedInput 
+      if result["usedArtifactInput"].present?
+        artifact = {:name => result["usedArtifactInput"].to_s, :type => "Artifact" }
+
+        indexTarget = nodes.find_index(artifact)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << artifact
+        end
+
+        # add the link
+        linkProcessToArtifact = {:source => indexTarget, :target => indexSource, :value => linkValue}
+        if links.find_index(linkProcessToArtifact).blank?
+          links << linkProcessToArtifact
+        end
+      end
+
+      # check if has property usedInput 
+      if result["usedDictionaryInput"].present?
+        dictionary = {:name => result["usedDictionaryInput"].to_s, :type => "Dictionary" }
+
+        indexTarget = nodes.find_index(artifact)
+
+        if indexTarget.blank?
+          indexTarget = nodes.count
+          nodes << dictionary
+        end
+
+        # add the link
+        linkProcessToArtifact = {:source => indexTarget, :target => indexSource, :value => linkValue}
+        if links.find_index(linkProcessToArtifact).blank?
+          links << linkProcessToArtifact
+        end
+      end
+
     end
 
     # get all the processes
@@ -297,7 +346,7 @@ class Provenance
         end
 
         # add the link
-        linkProcessToWf = {:source => indexSource, :target => indexTarget, :value => linkValue}
+        linkProcessToWf = {:source => indexTarget, :target => indexSource, :value => linkValue}
         if links.find_index(linkProcessToWf).blank?
           links << linkProcessToWf
         end
