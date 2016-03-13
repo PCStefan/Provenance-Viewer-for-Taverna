@@ -51,7 +51,7 @@
   border: 1px solid #ddd;
 }
 
-svg {
+/*svg {
   path.link {
     fill: none;
     stroke: #666;
@@ -75,7 +75,7 @@ svg {
   .fill_text {
     fill: red !important;
   }
-}
+}*/
 
 #mapContainer {
   position: relative;
@@ -84,6 +84,14 @@ svg {
   overflow : auto;
   padding : 0px;
   margin: 0px;
+}
+
+#wfContainer {
+  overflow : scroll;
+  position: relative;
+  top:10px;
+  height: 1200px;
+  width: 1586px;
 }
 
 #save_data_bundle {

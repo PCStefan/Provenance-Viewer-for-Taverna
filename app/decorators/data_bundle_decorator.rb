@@ -60,11 +60,47 @@ class DataBundleDecorator < Draper::Decorator
   end
 
   def to_dataHashObject
-    stream = []
+    paths = []
 
     workflow.datalinks.each do |link|
-      stream << write_link(link, workflow) 
+      paths << write_link(link, workflow) 
     end
+
+    stream = {}
+    nodes = []
+    links = []
+
+    paths.each do |path|
+      #get source node
+      source = {:name => path[:source] }
+      target = {:name => path[:target] }
+
+      indexSource = -1
+      indexTarget = -1
+
+      nodes.each_with_index do |node, index|
+        if node[:name].to_s == source[:name]
+          indexSource = index
+        elsif node[:name].to_s == target[:name]
+          indexTarget = index
+        end
+      end
+
+      if indexSource == -1
+        indexSource = nodes.count
+        nodes << source
+      end
+
+      if indexTarget == -1
+        indexTarget = nodes.count
+        nodes << target
+      end
+
+      links << {:source => indexSource, :target => indexTarget, :value => 50}
+
+    end
+
+    stream = {:nodes => nodes, :links => links }
     stream
   end
 
@@ -122,8 +158,5 @@ class DataBundleDecorator < Draper::Decorator
     #return 
     @provenance 
   end # def provenance
-
-
-
 
 end

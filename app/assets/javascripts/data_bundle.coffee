@@ -24,6 +24,49 @@ $(document).ready ->
     return
   return
 
+# distingush between single click and double click
+# see http://bl.ocks.org/couchand/6394506
+
+@clickCancel = -> 
+  event = d3.dispatch('click', 'dblclick')
+
+  cc = (selection) ->
+    down = undefined
+    tolerance = 5
+    last = undefined
+    wait = null
+    # euclidean distance
+
+    dist = (a, b) ->
+        Math.sqrt (a[0] - (b[0])) ** 2, (a[1] - (b[1])) ** 2
+
+    selection.on('mousedown', ->
+      down = d3.mouse(document.body)
+      last = +new Date
+      return
+    )
+    selection.on('mouseup', ->
+      if dist(down, d3.mouse(document.body)) > tolerance
+        return
+      else
+        if wait
+          window.clearTimeout wait
+          wait = null
+          event.dblclick d3.event
+        else
+          wait = window.setTimeout(((e) ->
+            ->
+              event.click e
+              wait = null
+              return
+          )(d3.event), 300)
+      return
+    )
+    return
+  d3.rebind(cc, event, 'on')
+
+# Here start diagrams func
+
 @glob_width = 0
 @dashLine = '\n---------------------------------------------------------------\n'
 @graph = {}
@@ -107,6 +150,7 @@ $(document).ready ->
 
     lineHeight = 1.1
     for temp in labels
+      temp = temp.substring(temp.lastIndexOf(' '))
       text.append('tspan').attr('x', text.attr('x')).attr('y', text.attr('y')).attr('dy', lineNumber * lineHeight + 'em' ).text(temp).filter((d) ->
         d.x < glob_width / 5
       ).attr('x', "22")
@@ -115,82 +159,16 @@ $(document).ready ->
     return
   return
 
-# distingush between single click and double click
-# see http://bl.ocks.org/couchand/6394506
-@clickCancel = -> 
-  return
-
 @draw = ->
   d3.json $('#data_bundle').attr('data-url'), (error, data) ->
     @tempgraph = $.extend(true, {}, data)
 
     if(Object.keys(tempgraph).length)
-      draw_workflow()
+      hasBeenDrawn = draw_workflow(hasBeenDrawn)
       draw_provenance()
 
     return  
   return
-
-@draw_workflow = ->
-  return
-  # if $('svg#graphContainer').length > 0
-  #   d3.json $('#data_bundle').attr('data-url'), (error, links) ->
-  #     tick = ->
-  #       path.attr 'd', (d) ->
-  #         dx = d.target.x - (d.source.x)
-  #         dy = d.target.y - (d.source.y)
-  #         dr = Math.sqrt(dx * dx + dy * dy)
-  #         'M' + d.source.x + ',' + d.source.y + 'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y
-  #       node.attr 'transform', (d) ->
-  #         'translate(' + d.x + ',' + d.y + ')'
-  #       return
-
-  #     nodes = {}
-
-
-  #     links.workflow.forEach (link) ->
-  #       link.source = nodes[link.source] or (nodes[link.source] =
-  #           name: link.source, file_content: link.file_content)
-  #       link.target = nodes[link.target] or (nodes[link.target] =
-  #           name: link.target, file_content: link.file_content)
-  #       link.value = +link.value
-  #       return
-
-  #     width = 960
-  #     height = 900
-
-  #     force = d3.layout.force().nodes(d3.values(nodes)).links(links.workflow).size([width, height])
-  #     .linkDistance(200).charge(-500).on('tick', tick).start()
-  #     svgContainer = d3.select('svg#graphContainer').attr('width', width).attr('height', height)
-
-  #     # build the arrow.
-  #     svgContainer.append('svg:defs').selectAll('marker').data(['end']).enter().append('svg:marker').attr('id', String)
-  #     .attr('viewBox', '0 -5 10 10').attr('refX', 15).attr('refY', -1.5).attr('markerWidth', 6)
-  #     .attr('markerHeight', 6).attr('orient', 'auto').append('svg:path').attr 'd', 'M0,-5L10,0L0,5'
-      
-  #     # add the links and the arrows
-  #     path = svgContainer.append('svg:g').selectAll('path').data(force.links()).enter().append('svg:path')
-  #     .attr('class', 'link').attr('marker-end', 'url(#end)')
-      
-  #     # define the nodes
-  #     node = svgContainer.selectAll('.node').data(force.nodes()).enter().append('g').attr('class', 'node')
-  #     .attr('id', (d) -> d.name).call(force.drag)
-      
-  #     # add the nodes
-  #     node.append('circle').attr('r', 5)
-      
-  #     # add the text
-  #     node.append('text').attr('x', 12).attr('dy', '.35em').text (d) ->
-  #       d.name
-  #     node.append('text').attr('class', 'file_content').attr('visibility', 'hidden').text (d) ->
-  #       return d.file_content
-
-  #     node.on 'click', (d) ->
-  #       rect = svgContainer.append('rect').transition().duration(500).attr('width', 250)
-  #       .attr('height', 300).attr('x', 10).attr('y', 10).style('fill', 'white').attr('stroke', 'black')
-  #       text = svgContainer.append('text').text(d.file_content)
-  #       .attr('x', 50).attr('y', 150).attr('fill', 'black')
-  #     return
 
 @clone = (obj) ->
   return obj  if obj is null or typeof (obj) isnt "object"
@@ -198,6 +176,80 @@ $(document).ready ->
   for key of obj
     temp[key] = clone(obj[key])
   temp
+
+@draw_workflow =(draw) ->
+  data = clone(@tempgraph.workflow)
+  if !draw?
+    width = 960
+    height = 650
+    color = d3.scale.category20()
+
+    svgContainer = d3.select('svg#graphContainer').attr('width', width+150).attr('height', width+200).append('g').attr('transform', (d) ->
+      "translate("+ (width) + ", 0) rotate (90)"
+      )
+
+    verticalSankey = d3.vertical_sankey().nodeWidth(25).nodePadding(20).size([width-128, height])
+
+    path = verticalSankey.link()
+    
+    verticalSankey.nodes(data.nodes).links(data.links).layout(32)
+
+    link = svgContainer.append('g').selectAll('.link').data(data.links).enter().append('path').attr('class', 'link').attr('d', path).style('stroke-width', (d) ->
+      Math.max 1, d.dy
+    ).style('stroke', (d) ->
+      d.source.color = color(d.source.name.replace(RegExp(' .*'), ''))
+    ).sort((a, b) ->
+      b.dx - (a.dx)
+    )
+
+    link.append('title').text((d) ->
+      d.source.name + ' → ' + d.target.name + '\n'
+    )
+
+    node = svgContainer.append('g').selectAll('.node').data(data.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
+      'translate(' + d.x + ',' + d.y + ')'
+    )
+    # .call(d3.behavior.drag().origin((d) ->
+    #   d
+    # ).on('dragstart', ->
+    #   @parentNode.appendChild this
+    #   return
+    # ).on('drag', dragmove))
+
+    node.append('rect').attr('width', verticalSankey.nodeWidth()).attr('height', (d) ->
+      Math.abs d.dy
+    ).style('fill', (d) ->
+      d.color = color(d.name.replace(RegExp(' .*'), ''))
+    ).style('stroke', (d) ->
+      d3.rgb(d.color).darker 2
+    )
+
+    node.append('text').attr('text-anchor', 'middle').attr('y', (d) ->
+      7
+    ).attr('x', (d) ->
+      d.dy/-2
+    ).attr('dy', '.35em').attr('transform', (d) ->
+      "translate("+ 0 + ", 0) rotate (270)"
+    ).text((d) ->
+      shortenName =(d) ->
+        
+        # convert the text to pixels     
+        canvas = document.createElement('canvas')
+        ctx = canvas.getContext("2d")
+        ctx.font = "14px Source Sans Pro"
+        textPX = ctx.measureText(d.name).width
+
+        if textPX > d.dy
+          d.name.substring(0, 9) + '..' + d.name.substring(d.name.length - 9, d.name.length)
+        else
+          d.name
+
+      shortenName(d)
+
+    ).filter (d) ->
+      d.x < width / 2
+
+  return true
 
 @draw_provenance =(diagramType) ->
   # if diagramType is undefined or null, as default assign the current active
@@ -300,7 +352,7 @@ $(document).ready ->
     # select all the nodes from the json-data and append them to the Sankey obj
     # add behavior : dragmove
     node = svg.append('g').selectAll('.node').data(graph.provenance.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
-        yValue = Math.min(d.y, (height - 25))
+        yValue = Math.min(d.y, height)
         'translate(' + d.x + ',' + yValue + ')'
         ).call(d3.behavior.drag().origin((d) ->
           d
@@ -388,15 +440,15 @@ $(document).ready ->
         return
       return
 
+    
+    cc = clickCancel()
+
     # show the whole path on single click on nodes
     # the function highlight_node_links uses Breadth First Search alghorithm to find the reachable nodes
-    node.on('click', click_highlight_path)
-    
-    # hide the links that are sourced from / targeted at current node
-    node.on('dblclick', (d) ->
+    # add remove the outgoing edges from current node on dblclick
+    node.call(cc).on('click', click_highlight_path).on('dblclick', (d)->
       if (d3.event.defaultPrevented) 
         return
-
       svg.selectAll('.link').filter((l) ->
         l.source == d
       ).attr('display', ->
@@ -422,6 +474,13 @@ $(document).ready ->
         d.label 
       else
         shortenStringNoMiddle(d.name)
+    ).style('opacity', ->
+      box = @getBBox()
+      console.log(box.width)
+      if box.width <= width and box.height <= height
+        1
+      else
+        0
     ).call(wrap).filter((d) ->
       d.x < width / 5
     ).attr('x', "22").attr('text-anchor', 'start')

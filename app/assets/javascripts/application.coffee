@@ -34,6 +34,7 @@
 #= require d3/d3.min
 #= require d3/d3.js
 #= require sankey.js
+#= require vertical_sankey.js
 #= require data_bundle
 
 $ ->

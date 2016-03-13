@@ -40,7 +40,8 @@ section.content
                           | -
                         - else
                           = @data_bundle.workflow.annotations.semantic_annotation
-                svg#graphContainer
+                #wfContainer
+                  svg#graphContainer
 
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
@@ -51,7 +52,7 @@ section.content
                       li.active
                         a#diagramSankey data-target="#provSankey" data-toggle="tab" Sankey
                       li
-                        a#diagramMiserables data-target="#provMiserable" data-toggle="tab" Miserables
+                        a#diagramMiserables data-target="#provChord" data-toggle="tab" Chord
                     .tab-content
                       .provCont
                         #mapContainer
