@@ -182,9 +182,15 @@ $(document).ready ->
   if !draw?
     width = 960
     height = 650
+    opacity = 0.7
+
     color = d3.scale.category20()
 
-    svgContainer = d3.select('svg#graphContainer').attr('width', width+150).attr('height', width+200).append('g').attr('transform', (d) ->
+    $('canvas#canvasWF').attr
+      'width': (width + 150)
+      'height': (width)
+
+    svgContainer = d3.select('svg#graphContainer').attr('width', width+150).attr('height', width).append('g').attr('transform', (d) ->
       "translate("+ (width) + ", 0) rotate (90)"
       )
 
@@ -202,8 +208,10 @@ $(document).ready ->
       b.dx - (a.dx)
     )
 
+    link.attr('opacity', opacity)
+
     link.append('title').text((d) ->
-      d.source.name + ' → ' + d.target.name + '\n'
+      d.source.name + '\n→\n' + d.target.name
     )
 
     node = svgContainer.append('g').selectAll('.node').data(data.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
@@ -225,7 +233,7 @@ $(document).ready ->
     )
 
     node.append('text').attr('text-anchor', 'middle').attr('y', (d) ->
-      7
+      12
     ).attr('x', (d) ->
       d.dy/-2
     ).attr('dy', '.35em').attr('transform', (d) ->
@@ -474,13 +482,6 @@ $(document).ready ->
         d.label 
       else
         shortenStringNoMiddle(d.name)
-    ).style('opacity', ->
-      box = @getBBox()
-      console.log(box.width)
-      if box.width <= width and box.height <= height
-        1
-      else
-        0
     ).call(wrap).filter((d) ->
       d.x < width / 5
     ).attr('x', "22").attr('text-anchor', 'start')
@@ -520,3 +521,62 @@ $(document).ready ->
     )
 
   return
+
+
+
+d3.select('#saveWF').on('click', ->
+  html = d3.select('#wfContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
+  imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(html)))
+  img = '<img src="' + imgsrc + '">'
+
+  console.log(html)
+  canvas = document.querySelector('canvas#canvasWF')
+  context = canvas.getContext("2d")
+  image = new Image
+  image.src = imgsrc
+
+  image.onload = ->
+    context.drawImage(image, 0, 0)
+    canvasdata = canvas.toDataURL('image/png')
+    pngimg = '<img src="' + canvasdata + '">'
+    
+    now = new Date
+    differential = now.getDate() + "_" + now.getMonth() + "_" + now.getFullYear() + "_" +  now.getHours() + "_" + now.getMinutes() + "_" + now.getSeconds()
+
+    a = document.createElement('a')
+    a.download = 'workflow_' + differential + '.png'
+    a.href = canvasdata
+    a.click()
+    return
+
+  return
+)
+
+d3.select('#savePROV').on('click', ->
+  html = d3.select('#mapContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
+  imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(html)))
+  img = '<img src="' + imgsrc + '">'
+
+  console.log(html)
+  canvas = document.querySelector('canvas#canvasPROV')
+  context = canvas.getContext("2d")
+  image = new Image
+  image.src = imgsrc
+
+  image.onload = ->
+    context.drawImage(image, 0, 0)
+    canvasdata = canvas.toDataURL('image/png')
+    pngimg = '<img src="' + canvasdata + '">'
+    
+    now = new Date
+    differential = now.getDate() + "_" + now.getMonth() + "_" + now.getFullYear() + "_" + now.getHours() + "_" + now.getMinutes() + "_" + now.getSeconds()
+
+
+    a = document.createElement('a')
+    a.download = 'provenance_' + differential + '.png'
+    a.href = canvasdata
+    a.click()
+    return
+
+  return
+)

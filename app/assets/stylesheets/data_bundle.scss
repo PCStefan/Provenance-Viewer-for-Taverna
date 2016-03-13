@@ -51,31 +51,11 @@
   border: 1px solid #ddd;
 }
 
-/*svg {
-  path.link {
-    fill: none;
-    stroke: #666;
-    stroke-width: 1.5px;
-  }
-
-  circle {
-    fill: #ccc;
-    stroke: #fff;
-    stroke-width: 1.5px;
-  }
-
-  text {
-    fill: #000;
-    pointer-events: none;
-  }
-
-  rect {
-    fill: #585858;
-  }
-  .fill_text {
-    fill: red !important;
-  }
-}*/
+.svgImage {
+  position: relative;
+  top: 15px;
+  left: 89%;
+}
 
 #mapContainer {
   position: relative;
@@ -90,7 +70,8 @@
   overflow : scroll;
   position: relative;
   top:10px;
-  height: 1200px;
+  padding-top: 10px;
+  height: 990px;
   width: 1586px;
 }
 

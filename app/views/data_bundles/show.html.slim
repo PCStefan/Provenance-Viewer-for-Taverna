@@ -42,6 +42,8 @@ section.content
                           = @data_bundle.workflow.annotations.semantic_annotation
                 #wfContainer
                   svg#graphContainer
+                button#saveWF.svgImage Save the workflow as image
+                canvas#canvasWF height="500" style="display:none" width="960" 
 
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
@@ -57,6 +59,8 @@ section.content
                       .provCont
                         #mapContainer
                           svg#provContainer
+                        button#savePROV.svgImage Save the provenance as image
+                        canvas#canvasPROV height="500" style="display:none" width="960" 
             - else
               .row No data to display
               br
