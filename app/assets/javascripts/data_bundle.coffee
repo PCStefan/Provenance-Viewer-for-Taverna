@@ -307,6 +307,10 @@ $(document).ready ->
     height = height + Math.floor( ratioLN * 2 )
     setGLWidth(width)
 
+    $('canvas#canvasPROV').attr
+      'width': width
+      'height': height
+
     svg = svg.attr('width', width+150).attr('height', height+150).append('g')
 
     sankey = sankey.size([width, height])
@@ -494,15 +498,15 @@ $(document).ready ->
 
     legendConfig =
       rectWidth: 20
-      rectHeight: 12
-      xOffset: 20
+      rectHeight: 14
+      xOffset: 625
       yOffset: 30
       xOffsetText: 5
-      yOffsetText: 10
+      yOffsetText: 11
       lineHeight: 10
       wordApart: 125
 
-    legendConfig.xOffsetText += legendConfig.xOffset
+    legendConfig.xOffsetText += 20
     legendConfig.yOffsetText += legendConfig.yOffset
 
     legend.append('rect').attr('x', (d, i) ->
@@ -525,11 +529,10 @@ $(document).ready ->
 
 
 d3.select('#saveWF').on('click', ->
-  html = d3.select('#wfContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
+  html = d3.select('svg#graphContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
   imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(html)))
   img = '<img src="' + imgsrc + '">'
 
-  console.log(html)
   canvas = document.querySelector('canvas#canvasWF')
   context = canvas.getContext("2d")
   image = new Image
@@ -553,11 +556,10 @@ d3.select('#saveWF').on('click', ->
 )
 
 d3.select('#savePROV').on('click', ->
-  html = d3.select('#mapContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
+  html = d3.select('svg#provContainer').attr('version', 1.1).attr('xmlns', 'http://www.w3.org/2000/svg').node().parentNode.innerHTML
   imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(html)))
   img = '<img src="' + imgsrc + '">'
 
-  console.log(html)
   canvas = document.querySelector('canvas#canvasPROV')
   context = canvas.getContext("2d")
   image = new Image
