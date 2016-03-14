@@ -174,19 +174,6 @@ window.onmousewheel = document.onmousewheel = wheel
   d3.select('g#zoomContainer').attr 'transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')'
   return
 
-@dragstarted = (d) ->
-  d3.event.sourceEvent.stopPropagation()
-  d3.select(this).classed 'dragging', true
-  return
-
-@dragged = (d) ->
-  d3.select(this).attr('cx', d.x = d3.event.x).attr 'cy', d.y = d3.event.y
-  return
-
-@dragended = (d) ->
-  d3.select(this).classed 'dragging', false
-  return
-
 @draw = ->
   d3.json $('#data_bundle').attr('data-url'), (error, data) ->
     @tempgraph = $.extend(true, {}, data)
@@ -312,14 +299,9 @@ window.onmousewheel = document.onmousewheel = wheel
 
   # zoom the d3 
   zoom = d3.behavior.zoom().scaleExtent([
-    1
+    0.5
     10
   ]).on('zoom', zoomed)
-
-  # move around the d3
-  drag = d3.behavior.drag().origin((d) ->
-    d
-  ).on('dragstart', dragstarted).on('drag', dragged).on('dragend', dragended)
 
   # load the svg#sankeyContainer
   # set the width and height attributes
