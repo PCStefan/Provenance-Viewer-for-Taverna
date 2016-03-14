@@ -51,11 +51,12 @@ class Provenance
       WHERE
       { 
         ?workflowRun  rdf:type  wfprov:WorkflowRun ;
-                      rdfs:label ?workflowRunLabel
+                      rdfs:label ?workflowRunLabel .
         OPTIONAL
         { 
           ?workflowRun  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflowRun  .
-          ?wasPartOfWorkflowRun  rdfs:label ?wasPartOfWorkflowRunLabel
+          ?wasPartOfWorkflowRun  rdfs:label ?wasPartOfWorkflowRunLabel  .
+          FILTER NOT EXISTS { ?something  foaf:primaryTopic  ?wasPartOfWorkflowRun }
         }
         OPTIONAL
         {
@@ -69,6 +70,7 @@ class Provenance
             FILTER NOT EXISTS { ?usedArtifactInput  rdf:type  prov:Dictionary }
           }
         }
+        FILTER NOT EXISTS { ?something  foaf:primaryTopic  ?workflowRun }
       }")
 
     #return the result of the performing the query
@@ -89,7 +91,8 @@ class Provenance
         OPTIONAL
           { 
             ?processURI  wfprov:wasPartOfWorkflowRun  ?wasPartOfWorkflow  .
-            ?wasPartOfWorkflow  rdfs:label  ?wasPartOfWorkflowLabel 
+            ?wasPartOfWorkflow  rdfs:label  ?wasPartOfWorkflowLabel .
+            FILTER NOT EXISTS { ?something  foaf:primaryTopic  ?wasPartOfWorkflow }
           }
         OPTIONAL
         { 
@@ -128,7 +131,8 @@ class Provenance
           { 
             ?artifactURI  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
             ?outputFromWorkflowRun  rdf:type  wfprov:WorkflowRun ;
-                                    rdfs:label  ?outputFromWorkflowRunLabel 
+                                    rdfs:label  ?outputFromWorkflowRunLabel .
+            FILTER NOT EXISTS { ?something  foaf:primaryTopic  ?outputFromWorkflowRun }
           }
           OPTIONAL
           { 
@@ -165,7 +169,8 @@ class Provenance
           { 
             ?dictionary  wfprov:wasOutputFrom  ?outputFromWorkflowRun .
             ?outputFromWorkflowRun  rdf:type  wfprov:WorkflowRun ; 
-                                    rdfs:label ?outputFromWorkflowRunLabel
+                                    rdfs:label ?outputFromWorkflowRunLabel .
+            FILTER NOT EXISTS { ?something  foaf:primaryTopic  ?outputFromWorkflowRun }
           }
           OPTIONAL
           { 
@@ -177,6 +182,8 @@ class Provenance
           }
         }
       }")
+
+    p sparql_query
 
     # return the result of the performing the query
     sparql_query.execute(graph)

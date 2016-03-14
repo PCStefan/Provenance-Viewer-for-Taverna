@@ -23,7 +23,7 @@ $(document).ready ->
     draw_provenance($(this).text())
     return
 
-@isEnabled = undefined #is the mouse wheel scroll disabled or enabled
+@isEnabled = false #is the mouse wheel scroll disabled or enabled
 
 $('#enableZooming').click ->
 
@@ -328,111 +328,110 @@ $('#enableZooming').click ->
   @graph = clone(@tempgraph)
   if(diagramType == 'Sankey')
     draw_sankey()
-  # else if(diagramType == 'Co-occurrence')
-  #   draw_miserables()
+  else if(diagramType == 'Co-occurrence')
+    draw_miserables()
   
   
   return
 
 
 @draw_miserables = ->
-  return 
-  # width = 950
-  # height = 750
+  width = 950
+  height = 750
 
-  # # compute a better width and height for the container
-  # nodesCount = Object.keys(graph.provenance.nodes).length 
-  # linksCount = Object.keys(graph.provenance.links).length
+  # compute a better width and height for the container
+  nodesCount = Object.keys(graph.provenance.nodes).length 
+  linksCount = Object.keys(graph.provenance.links).length
 
-  # if nodesCount > 0 or linksCount > 0
-  #   ratioLN = linksCount / nodesCount * 100
-  #   width = width + Math.floor( ratioLN * 3 )
-  #   height = height + Math.floor( ratioLN * 2 )
-  #   setGLWidth(width)
+  if nodesCount > 0 or linksCount > 0
+    ratioLN = linksCount / nodesCount * 100
+    width = width + Math.floor( ratioLN * 3 )
+    height = height + Math.floor( ratioLN * 2 )
+    setGLWidth(width)
 
-  #   $('canvas#canvasPROV').attr
-  #     'width': width
-  #     'height': height
+    $('canvas#canvasPROV').attr
+      'width': width
+      'height': height
 
 
-  #   x = d3.scale.ordinal().rangeBands([
-  #     0
-  #     width
-  #   ])
-  #   z = d3.scale.linear().domain([
-  #     0
-  #     4
-  #   ]).clamp(true)
-  #   c = d3.scale.category10().domain(d3.range(10))
+    x = d3.scale.ordinal().rangeBands([
+      0
+      width
+    ])
+    z = d3.scale.linear().domain([
+      0
+      4
+    ]).clamp(true)
+    c = d3.scale.category10().domain(d3.range(10))
 
-    # svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g')
+    svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g')
 
-  # # build a [source, target] matrix
-    # matrix = []
-    # nodes = graph.provenance.nodes
-    # n = nodes.length
+  # build a [source, target] matrix
+    matrix = []
+    nodes = graph.provenance.nodes
+    n = nodes.length
 
-    # # Compute index per node.
-    # nodes.forEach (node, i) ->
-    #   node.index = i
-    #   node.count = 0
-    #   matrix[i] = d3.range(n).map((j) ->
-    #     {
-    #       x: j
-    #       y: i
-    #       z: 0
-    #     }
-    #   )
-    #   return
+    # Compute index per node.
+    nodes.forEach (node, i) ->
+      node.index = i
+      node.count = 0
+      matrix[i] = d3.range(n).map((j) ->
+        {
+          x: j
+          y: i
+          z: 0
+        }
+      )
+      return
 
-    # # Convert links to matrix; count character occurrences.
-    #   graph.provenance.links.forEach (link) ->
-    #     matrix[link.source][link.target].z += link.value
-    #     matrix[link.target][link.source].z += link.value
-    #     matrix[link.source][link.source].z += link.value
-    #     matrix[link.target][link.target].z += link.value
-    #     nodes[link.source].count += link.value
-    #     nodes[link.target].count += link.value
-    #     return
+    # Convert links to matrix; count character occurrences.
+      graph.provenance.links.forEach (link) ->
+        matrix[link.source][link.target].z += link.value
+        matrix[link.target][link.source].z += link.value
+        matrix[link.source][link.source].z += link.value
+        matrix[link.target][link.target].z += link.value
+        nodes[link.source].count += link.value
+        nodes[link.target].count += link.value
+        return
 
-    # # Precompute the orders.
-    # orders = 
-    #   name: d3.range(n).sort((a, b) ->
-    #     d3.ascending nodes[a].name, nodes[b].name
-    #   )
-    #   count: d3.range(n).sort((a, b) ->
-    #     nodes[b].count - (nodes[a].count)
-    #   )
-    #   group: d3.range(n).sort((a, b) ->
-    #     createGroupType(nodes[b].type) - createGroupType(nodes[a].type)
-    #   )
-    # console.log(orders)
+    # Precompute the orders.
+    orders = 
+      name: d3.range(n).sort((a, b) ->
+        d3.ascending nodes[a].name, nodes[b].name
+      )
+      count: d3.range(n).sort((a, b) ->
+        nodes[b].count - (nodes[a].count)
+      )
+      group: d3.range(n).sort((a, b) ->
+        createGroupType(nodes[b].type) - createGroupType(nodes[a].type)
+      )
+    console.log(orders)
     
-    # # The default sort order.
-    # x.domain orders.name
+    # The default sort order.
+    x.domain orders.name
 
-    # svg.append('rect').attr('class', 'background').attr('width', width).attr('height', height)
+    svg.append('rect').attr('class', 'background').attr('width', width).attr('height', height)
 
-    # row = svg.selectAll('.row').data(matrix).enter().append('g').attr('class', 'row').attr('transform', (d, i) ->
-    #   'translate(0,' + x(i) + ')'
-    # ).each(row)
+    row = svg.selectAll('.row').data(matrix).enter().append('g').attr('class', 'row').attr('transform', (d, i) ->
+      'translate(0,' + x(i) + ')'
+    ).each(row)
 
-    # row.append('line').attr 'x2', width
+    row.append('line').attr 'x2', width
 
-    # row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text (d, i) ->
-    #   nodes[i].label
+    row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text (d, i) ->
+      nodes[i].label
 
-    # column = svg.selectAll('.column').data(matrix).enter().append('g').attr('class', 'column').attr('transform', (d, i) ->
-    #   'translate(' + x(i) + ')rotate(-90)'
-    # )
+    column = svg.selectAll('.column').data(matrix).enter().append('g').attr('class', 'column').attr('transform', (d, i) ->
+      'translate(' + x(i) + ')rotate(-90)'
+    )
 
-    # column.append('line').attr 'x1', -width
+    column.append('line').attr 'x1', -width
     
-    # column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text (d, i) ->
-    #   nodes[i].label
+    column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text (d, i) ->
+      nodes[i].label
 
 
-  # return
+  return
 
 
 @draw_sankey = ->
