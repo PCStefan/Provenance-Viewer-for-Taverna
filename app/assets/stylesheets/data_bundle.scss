@@ -54,7 +54,12 @@
 .svgImage {
   position: relative;
   top: 15px;
-  left: 89%;
+  left: 88.5%;
+}
+
+#enableZooming {
+  margin-right: 20px;
+  margin-left : -146px;
 }
 
 #mapContainer {
@@ -72,7 +77,8 @@
   top:10px;
   padding-top: 10px;
   height: 990px;
-  width: 1586px;
+  min-width: 990px;
+  max-width: 1586px;
 }
 
 #save_data_bundle {

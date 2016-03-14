@@ -22,21 +22,50 @@ $(document).ready ->
   $('#diagramType li a').click ->
     draw_provenance($(this).text())
     return
+
+@isEnabled = undefined #is the mouse wheel scroll disabled or enabled
+
+$('#enableZooming').click ->
+
+  isEnabled = undefined
+
+  if $("#enableZooming span").html() == 'Enable Zooming'
+    isEnabled = true
+    $("#enableZooming span").html('Disable Zooming')
+  else
+    isEnabled = false
+    $("#enableZooming span").html('Enable Zooming')
+  
+  disableMidMouse(isEnabled)
+
   return
 
-# disable middle mouse button scrolling
-wheel = (event) ->
-  event.preventDefault()
-  event.returnValue = false
-  return
+@disableMidMouse = (status) -> 
+  # enable/disable middle mouse button scrolling
+  wheelEnable = (event) ->
+    event.preventDefault()
+    event.returnValue = true
+    return
+  
+  wheelDisable = (event) ->
+    event.preventDefault()
+    event.returnValue = false
+    return
 
-if window.addEventListener
-  window.addEventListener 'DOMMouseScroll', wheel, false
-window.onmousewheel = document.onmousewheel = wheel
+  setisEnabled(status)
+
+  if window.addEventListener
+    if status
+      window.addEventListener('DOMMouseScroll', wheelDisable, false)
+      window.onmousewheel = document.onmousewheel = wheelDisable
+    else
+      window.addEventListener('DOMMouseScroll', wheelEnable, false)
+      window.onmousewheel = document.onmousewheel = wheelEnable
+
+  return
 
 # distingush between single click and double click
 # see http://bl.ocks.org/couchand/6394506
-
 @clickCancel = -> 
   event = d3.dispatch('click', 'dblclick')
 
@@ -87,6 +116,11 @@ window.onmousewheel = document.onmousewheel = wheel
   @glob_width = reqWidth
   return
 
+@setisEnabled =(status) ->
+  @isEnabled = status
+  return
+
+
 # set a color for a node
 @getColorHex =(source) ->
   color = d3.scale.category20()
@@ -98,6 +132,16 @@ window.onmousewheel = document.onmousewheel = wheel
     when 'Dictionary' then colorType = '#7f0eff'
     else colorType = color(stringTextForColor.replace(RegExp(' .*'), ''))
   colorType
+
+@createGroupType =(type) ->
+  group = -1
+  switch type
+    when 'Workflow Run' then group = 1
+    when 'Process Run' then group = 2
+    when 'Artifact' then group = 3
+    when 'Dictionary' then group = 4
+    else group = 0
+  group
 
 # limit a string to maxChar
 @shortenString =(temp, maxChar) ->
@@ -171,7 +215,10 @@ window.onmousewheel = document.onmousewheel = wheel
 
 # some local functions for zooming in/out and for walking around
 @zoomed = ->
-  d3.select('g#zoomContainer').attr 'transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')'
+  if isEnabled
+    d3.select('g#zoomContainer').attr 'transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')'
+  else
+    null
   return
 
 @draw = ->
@@ -232,12 +279,6 @@ window.onmousewheel = document.onmousewheel = wheel
     node = svgContainer.append('g').selectAll('.node').data(data.nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
       'translate(' + d.x + ',' + d.y + ')'
     )
-    # .call(d3.behavior.drag().origin((d) ->
-    #   d
-    # ).on('dragstart', ->
-    #   @parentNode.appendChild this
-    #   return
-    # ).on('drag', dragmove))
 
     node.append('rect').attr('width', verticalSankey.nodeWidth()).attr('height', (d) ->
       Math.abs d.dy
@@ -284,11 +325,115 @@ window.onmousewheel = document.onmousewheel = wheel
     d3.select('svg#provContainer').remove()
     d3.select('#mapContainer').append('svg').attr('id','provContainer')
     
-  @graph = clone(tempgraph)
+  @graph = clone(@tempgraph)
   if(diagramType == 'Sankey')
     draw_sankey()
+  # else if(diagramType == 'Co-occurrence')
+  #   draw_miserables()
+  
   
   return
+
+
+@draw_miserables = ->
+  return 
+  # width = 950
+  # height = 750
+
+  # # compute a better width and height for the container
+  # nodesCount = Object.keys(graph.provenance.nodes).length 
+  # linksCount = Object.keys(graph.provenance.links).length
+
+  # if nodesCount > 0 or linksCount > 0
+  #   ratioLN = linksCount / nodesCount * 100
+  #   width = width + Math.floor( ratioLN * 3 )
+  #   height = height + Math.floor( ratioLN * 2 )
+  #   setGLWidth(width)
+
+  #   $('canvas#canvasPROV').attr
+  #     'width': width
+  #     'height': height
+
+
+  #   x = d3.scale.ordinal().rangeBands([
+  #     0
+  #     width
+  #   ])
+  #   z = d3.scale.linear().domain([
+  #     0
+  #     4
+  #   ]).clamp(true)
+  #   c = d3.scale.category10().domain(d3.range(10))
+
+    # svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g')
+
+  # # build a [source, target] matrix
+    # matrix = []
+    # nodes = graph.provenance.nodes
+    # n = nodes.length
+
+    # # Compute index per node.
+    # nodes.forEach (node, i) ->
+    #   node.index = i
+    #   node.count = 0
+    #   matrix[i] = d3.range(n).map((j) ->
+    #     {
+    #       x: j
+    #       y: i
+    #       z: 0
+    #     }
+    #   )
+    #   return
+
+    # # Convert links to matrix; count character occurrences.
+    #   graph.provenance.links.forEach (link) ->
+    #     matrix[link.source][link.target].z += link.value
+    #     matrix[link.target][link.source].z += link.value
+    #     matrix[link.source][link.source].z += link.value
+    #     matrix[link.target][link.target].z += link.value
+    #     nodes[link.source].count += link.value
+    #     nodes[link.target].count += link.value
+    #     return
+
+    # # Precompute the orders.
+    # orders = 
+    #   name: d3.range(n).sort((a, b) ->
+    #     d3.ascending nodes[a].name, nodes[b].name
+    #   )
+    #   count: d3.range(n).sort((a, b) ->
+    #     nodes[b].count - (nodes[a].count)
+    #   )
+    #   group: d3.range(n).sort((a, b) ->
+    #     createGroupType(nodes[b].type) - createGroupType(nodes[a].type)
+    #   )
+    # console.log(orders)
+    
+    # # The default sort order.
+    # x.domain orders.name
+
+    # svg.append('rect').attr('class', 'background').attr('width', width).attr('height', height)
+
+    # row = svg.selectAll('.row').data(matrix).enter().append('g').attr('class', 'row').attr('transform', (d, i) ->
+    #   'translate(0,' + x(i) + ')'
+    # ).each(row)
+
+    # row.append('line').attr 'x2', width
+
+    # row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text (d, i) ->
+    #   nodes[i].label
+
+    # column = svg.selectAll('.column').data(matrix).enter().append('g').attr('class', 'column').attr('transform', (d, i) ->
+    #   'translate(' + x(i) + ')rotate(-90)'
+    # )
+
+    # column.append('line').attr 'x1', -width
+    
+    # column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text (d, i) ->
+    #   nodes[i].label
+
+
+  # return
+
 
 @draw_sankey = ->
   width = 950
@@ -306,7 +451,7 @@ window.onmousewheel = document.onmousewheel = wheel
   # load the svg#sankeyContainer
   # set the width and height attributes
   # append a function g that has a tranform process defined by translation
-  svg = d3.select('svg#provContainer')
+  svgContainer = d3.select('svg#provContainer')
 
   # define the sankey object 
   # set the node width to 15
@@ -317,7 +462,6 @@ window.onmousewheel = document.onmousewheel = wheel
   path = sankey.reversibleLink()
 
   # load data to work with
-  # function (error, links) will be defined after that $('#data_bundle').attr('data-url') will be requested and accepted  
 
   # compute a better width and height for the container
   nodesCount = Object.keys(graph.provenance.nodes).length 
@@ -333,20 +477,54 @@ window.onmousewheel = document.onmousewheel = wheel
       'width': width
       'height': height
 
-    svgContainer = svg.attr('width', width+150).attr('height', height+150).append('g').call(zoom).on("dblclick.zoom", null).on("click.zoom", null)
-    .on("mousedown.zoom", null)
+    svgContainer.attr('width', width+125).attr('height', height+150).append('g')
 
     rect = svgContainer.append('rect').attr('width', width).attr('height', height).style('fill', 'none').style('pointer-events', 'all')
 
     sankey = sankey.size([width, height])
 
-    svg = svgContainer.append('g').attr("id", "zoomContainer")
+
+    svg = svgContainer.append('g').attr("id", "zoomContainer").attr('transform', 'translate(0,' + 75 + ')')
+
+    svgContainer.call(zoom).on("dblclick.zoom", null).on("click.zoom", null).on("mousedown.zoom", null)
 
     # set the nodes
     # set the links
     # set the layout
     sankey.nodes(graph.provenance.nodes).links(graph.provenance.links)
     sankey.layout(32)
+
+    legendCategories = { "category":[{"type":"Workflow Run"},{"type":"Process Run"}, {"type":"Artifact"}, {"type":"Dictionary"}] }
+    legend = svgContainer.append('g').attr('class', 'legend').attr('x', 0).attr('y', 0).selectAll('.category').data(legendCategories.category).enter().append('g').attr('class', 'category')
+
+    legendConfig =
+      rectWidth: 20
+      rectHeight: 14
+      xOffset: 625
+      yOffset: 30
+      xOffsetText: 5
+      yOffsetText: 11
+      lineHeight: 10
+      wordApart: 125
+
+    legendConfig.xOffsetText += 20
+    legendConfig.yOffsetText += legendConfig.yOffset
+
+    legend.append('rect').attr('x', (d, i) ->
+      legendConfig.xOffset + i * legendConfig.wordApart
+    )
+    .attr('y', legendConfig.yOffset).attr('height', legendConfig.rectHeight).attr('width', legendConfig.rectWidth).style('fill', (d) ->
+      getColorHex(d.type)
+    ).style('stroke', (d) ->
+      d3.rgb(d.color).darker 1
+    )
+
+    legend.append('text').attr('x', (d, i) ->
+      legendConfig.xOffset + i * legendConfig.wordApart + legendConfig.xOffsetText
+    ).attr('y', legendConfig.yOffsetText).text((d) ->
+      d.type
+    )
+
 
     # select all the links from the json-data and append them to the Sankey obj in alphabetical order 
     link = svg.append('g').selectAll('.link').data(graph.provenance.links).enter().append('g').attr('class', 'link').attr('id', (d,i) ->
@@ -519,37 +697,6 @@ window.onmousewheel = document.onmousewheel = wheel
 
     # select all the nodes from the json-data and append them to the Sankey obj
     # add behavior : dragmove
-
-    legendCategories = { "category":[{"type":"Workflow Run"},{"type":"Process Run"}, {"type":"Artifact"}, {"type":"Dictionary"}] }
-    legend = svg.append('g').attr('class', 'legend').attr('x', 0).attr('y', 0).selectAll('.category').data(legendCategories.category).enter().append('g').attr('class', 'category')
-
-    legendConfig =
-      rectWidth: 20
-      rectHeight: 14
-      xOffset: 625
-      yOffset: 30
-      xOffsetText: 5
-      yOffsetText: 11
-      lineHeight: 10
-      wordApart: 125
-
-    legendConfig.xOffsetText += 20
-    legendConfig.yOffsetText += legendConfig.yOffset
-
-    legend.append('rect').attr('x', (d, i) ->
-      legendConfig.xOffset + i * legendConfig.wordApart
-    )
-    .attr('y', legendConfig.yOffset).attr('height', legendConfig.rectHeight).attr('width', legendConfig.rectWidth).style('fill', (d) ->
-      getColorHex(d.type)
-    ).style('stroke', (d) ->
-      d3.rgb(d.color).darker 1
-    )
-
-    legend.append('text').attr('x', (d, i) ->
-      legendConfig.xOffset + i * legendConfig.wordApart + legendConfig.xOffsetText
-    ).attr('y', legendConfig.yOffsetText).text((d) ->
-      d.type
-    )
 
   return
 

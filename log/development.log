@@ -52481,3 +52481,1954 @@ Processing by DataBundlesController#show as JSON
   Parameters: {"id"=>"10"}
   [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
 Completed 200 OK in 2181ms (Views: 17.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:09:25 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1900.6ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2928ms (Views: 2925.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 01:09:29 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2084ms (Views: 30.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:26:33 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2086.4ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 500 Internal Server Error in 2477ms (ActiveRecord: 1.1ms)
+
+ExecJS::RuntimeError - SyntaxError: [stdin]:382:15: unmatched OUTDENT:
+  execjs (2.6.0) lib/execjs/external_runtime.rb:84:in `extract_result'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:39:in `exec'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:21:in `eval'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:46:in `call'
+  coffee-script (2.4.1) lib/coffee_script.rb:78:in `compile'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:21:in `block in call'
+  sprockets (3.5.2) lib/sprockets/cache.rb:85:in `fetch'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:20:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:23:in `block in call'
+  sprockets (3.5.2) lib/sprockets/utils.rb:183:in `dfs'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:24:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/base.rb:66:in `find_asset'
+  sprockets (3.5.2) lib/sprockets/base.rb:92:in `[]'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:341:in `find_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:333:in `find_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:216:in `block in lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:229:in `block in resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:228:in `resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:215:in `lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:128:in `block in javascript_include_tag'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:127:in `javascript_include_tag'
+  app/views/layouts/application.html.slim:34:in `_app_views_layouts_application_html_slim__4604094020280452299_50053020'
+  actionview (4.2.3) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.3) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:66:in `render_with_layout'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.3) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.3) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.3) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.3) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/cpadurariu/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/mime_responds.rb:215:in `respond_to'
+  app/controllers/data_bundles_controller.rb:35:in `show'
+  actionpack (4.2.3) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:115:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:553:in `block (2 levels) in compile'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:503:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:88:in `run_callbacks'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.3) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.3) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.3) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:76:in `dispatch'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:45:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:821:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.3) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.3) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:84:in `run_callbacks'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+
+Started POST "/__better_errors/cc2dfebb78d5e37e/variables" for 127.0.0.1 at 2016-03-14 01:26:37 +0000
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:26:52 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1841.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 500 Internal Server Error in 2190ms (ActiveRecord: 1.0ms)
+
+ExecJS::RuntimeError - SyntaxError: [stdin]:382:15: unmatched OUTDENT:
+  execjs (2.6.0) lib/execjs/external_runtime.rb:84:in `extract_result'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:39:in `exec'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:21:in `eval'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:46:in `call'
+  coffee-script (2.4.1) lib/coffee_script.rb:78:in `compile'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:21:in `block in call'
+  sprockets (3.5.2) lib/sprockets/cache.rb:85:in `fetch'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:20:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:23:in `block in call'
+  sprockets (3.5.2) lib/sprockets/utils.rb:183:in `dfs'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:24:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/base.rb:66:in `find_asset'
+  sprockets (3.5.2) lib/sprockets/base.rb:92:in `[]'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:341:in `find_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:333:in `find_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:216:in `block in lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:229:in `block in resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:228:in `resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:215:in `lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:128:in `block in javascript_include_tag'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:127:in `javascript_include_tag'
+  app/views/layouts/application.html.slim:34:in `_app_views_layouts_application_html_slim__4604094020280452299_50053020'
+  actionview (4.2.3) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.3) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:66:in `render_with_layout'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.3) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.3) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.3) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.3) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/cpadurariu/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/mime_responds.rb:215:in `respond_to'
+  app/controllers/data_bundles_controller.rb:35:in `show'
+  actionpack (4.2.3) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:115:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:553:in `block (2 levels) in compile'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:503:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:88:in `run_callbacks'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.3) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.3) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.3) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:76:in `dispatch'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:45:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:821:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.3) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.3) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:84:in `run_callbacks'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+
+Started POST "/__better_errors/71c4f382a427d7fe/variables" for 127.0.0.1 at 2016-03-14 01:26:55 +0000
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:27:03 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2070.7ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 500 Internal Server Error in 2404ms (ActiveRecord: 1.1ms)
+
+ExecJS::RuntimeError - SyntaxError: [stdin]:382:15: unmatched OUTDENT:
+  execjs (2.6.0) lib/execjs/external_runtime.rb:84:in `extract_result'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:39:in `exec'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:21:in `eval'
+  execjs (2.6.0) lib/execjs/external_runtime.rb:46:in `call'
+  coffee-script (2.4.1) lib/coffee_script.rb:78:in `compile'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:21:in `block in call'
+  sprockets (3.5.2) lib/sprockets/cache.rb:85:in `fetch'
+  sprockets (3.5.2) lib/sprockets/coffee_script_processor.rb:20:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:23:in `block in call'
+  sprockets (3.5.2) lib/sprockets/utils.rb:183:in `dfs'
+  sprockets (3.5.2) lib/sprockets/bundle.rb:24:in `call'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:75:in `call_processor'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:57:in `block in call_processors'
+  sprockets (3.5.2) lib/sprockets/processor_utils.rb:56:in `call_processors'
+  sprockets (3.5.2) lib/sprockets/loader.rb:134:in `load_from_unloaded'
+  sprockets (3.5.2) lib/sprockets/loader.rb:60:in `block in load'
+  sprockets (3.5.2) lib/sprockets/loader.rb:318:in `fetch_asset_from_dependency_cache'
+  sprockets (3.5.2) lib/sprockets/loader.rb:44:in `load'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:20:in `block in initialize'
+  sprockets (3.5.2) lib/sprockets/cached_environment.rb:47:in `load'
+  sprockets (3.5.2) lib/sprockets/base.rb:66:in `find_asset'
+  sprockets (3.5.2) lib/sprockets/base.rb:92:in `[]'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:341:in `find_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:333:in `find_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:216:in `block in lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:229:in `block in resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:228:in `resolve_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:215:in `lookup_debug_asset'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:128:in `block in javascript_include_tag'
+  sprockets-rails (3.0.4) lib/sprockets/rails/helper.rb:127:in `javascript_include_tag'
+  app/views/layouts/application.html.slim:34:in `_app_views_layouts_application_html_slim__4604094020280452299_50053020'
+  actionview (4.2.3) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.3) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.3) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:66:in `render_with_layout'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.3) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.3) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.3) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.3) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.3) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.3) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/cpadurariu/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.3) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.3) lib/action_controller/metal/mime_responds.rb:215:in `respond_to'
+  app/controllers/data_bundles_controller.rb:35:in `show'
+  actionpack (4.2.3) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:115:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:553:in `block (2 levels) in compile'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:503:in `call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:88:in `run_callbacks'
+  actionpack (4.2.3) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.3) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.3) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.3) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.3) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.3) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.3) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.3) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.3) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:76:in `dispatch'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:45:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.3) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.3) lib/action_dispatch/routing/route_set.rb:821:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:186:in `call!'
+  omniauth (1.3.1) lib/omniauth/strategy.rb:164:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.3) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.3) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:84:in `run_callbacks'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+
+Started POST "/__better_errors/0fcfe4714fef4c7d/variables" for 127.0.0.1 at 2016-03-14 01:27:06 +0000
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:28:30 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1887.1ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2773ms (Views: 2770.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 01:28:34 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1860ms (Views: 19.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 01:30:38 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2033.6ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 3042ms (Views: 3038.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 01:30:42 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1965ms (Views: 18.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:06:10 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1962.4ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2932ms (Views: 2928.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:06:14 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2157ms (Views: 20.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:08:21 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1911.7ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2868ms (Views: 2864.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:08:26 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2262ms (Views: 19.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:08:45 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1921.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1959ms (Views: 1956.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:08:48 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2225ms (Views: 19.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:09:36 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2024.4ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2934ms (Views: 2930.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:09:41 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2343ms (Views: 22.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:10:27 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1896.9ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2829ms (Views: 2826.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:10:32 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2265ms (Views: 30.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:11:05 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2004.5ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2058ms (Views: 2055.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:11:08 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2655ms (Views: 25.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:12:43 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1928.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2752ms (Views: 2749.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:12:47 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2249ms (Views: 32.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:14:05 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1929.4ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2846ms (Views: 2842.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:14:10 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2046ms (Views: 21.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 08:15:22 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1879.1ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2849ms (Views: 2845.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 08:15:26 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2093ms (Views: 19.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:06:03 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.7ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2035.8ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 3037ms (Views: 3034.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:06:07 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2222ms (Views: 17.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2016-03-14 10:16:42 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mUser Load (2.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 655ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-14 10:16:42 +0000
+Processing by DataBundlesController#index as HTML
+  Rendered data_bundles/index.html.slim within layouts/application (29.4ms)
+Completed 200 OK in 1211ms (Views: 1201.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/undefined" for 127.0.0.1 at 2016-03-14 10:16:44 +0000
+
+ActionController::RoutingError (No route matches [GET] "/undefined"):
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `call'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.5ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (19.1ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (85.4ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-03-14 10:16:47 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.slim (12.4ms)
+  Rendered devise/sessions/new.html.slim within layouts/devise (42.2ms)
+Completed 200 OK in 94ms (Views: 91.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/undefined" for 127.0.0.1 at 2016-03-14 10:16:47 +0000
+
+ActionController::RoutingError (No route matches [GET] "/users/undefined"):
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `call'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.3ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (55.4ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-03-14 10:16:52 +0000
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hDKyb1lsfcd5yitujeunELpxoDi48DkPdBYf2+AK5GY8bXoIUUVqbPje85klJ+M5PR7Sgsk9Y6ZR2A4gy4Z42w==", "user"=>{"email"=>"developer123@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "developer123@test.com"]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (2.0ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["last_sign_in_at", "2016-03-13 11:04:51.596560"], ["current_sign_in_at", "2016-03-14 10:16:53.010965"], ["sign_in_count", 4], ["updated_at", "2016-03-14 10:16:53.012831"], ["id", 2]]
+  [1m[35m (2.7ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 193ms (ActiveRecord: 5.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-14 10:16:53 +0000
+Processing by DataBundlesController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."user_id" = $1 LIMIT 10 OFFSET 0  [["user_id", 2]]
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM "data_bundles" WHERE "data_bundles"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered shared/_errors.html.slim (5.5ms)
+  Rendered data_bundles/_form.html.slim (14.4ms)
+  Rendered data_bundles/index.html.slim within layouts/application (48.3ms)
+Completed 200 OK in 133ms (Views: 83.9ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/undefined" for 127.0.0.1 at 2016-03-14 10:16:53 +0000
+
+ActionController::RoutingError (No route matches [GET] "/undefined"):
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `call'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.5ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.9ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.0ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (76.5ms)
+
+
+Started POST "/data_bundles" for 127.0.0.1 at 2016-03-14 10:18:07 +0000
+Processing by DataBundlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QT5g5WVbm7oA7EkEMdlBdCAA8NYnHjkzAb3FeBVWfRbK+wAN3PXnnkjWGErNY2cf8MOa8TWrKPpKeD5sbBoQPw==", "data_bundle"=>{"name"=>"Hello Stian", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fe5d72ebae8 @tempfile=#<Tempfile:/tmp/RackMultipart20160314-32050-f4vynl.zip>, @original_filename="hello.bundle.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"data_bundle[file]\"; filename=\"hello.bundle.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Save"}
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO "data_bundles" ("file", "name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["file", "hello.bundle.zip"], ["name", "Hello Stian"], ["user_id", 2], ["created_at", "2016-03-14 10:18:07.556897"], ["updated_at", "2016-03-14 10:18:07.556897"]]
+  [1m[36m (2.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/data_bundles/11
+Completed 302 Found in 198ms (ActiveRecord: 4.8ms)
+
+
+Started GET "/data_bundles/11" for 127.0.0.1 at 2016-03-14 10:18:07 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 11]]
+  Rendered data_bundles/show.html.slim within layouts/application (592.9ms)
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 640ms (Views: 628.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/data_bundles/11.json" for 127.0.0.1 at 2016-03-14 10:18:09 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"11"}
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 11]]
+Completed 200 OK in 315ms (Views: 0.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/data_bundles/11" for 127.0.0.1 at 2016-03-14 10:21:45 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mDataBundle Load (0.8ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 11]]
+  Rendered data_bundles/show.html.slim within layouts/application (255.7ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 298ms (Views: 293.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/data_bundles/11.json" for 127.0.0.1 at 2016-03-14 10:21:47 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"11"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 11]]
+Completed 200 OK in 248ms (Views: 1.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/data_bundles" for 127.0.0.1 at 2016-03-14 10:22:10 +0000
+Processing by DataBundlesController#index as HTML
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mDataBundle Load (0.6ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."user_id" = $1 LIMIT 10 OFFSET 0[0m  [["user_id", 2]]
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM "data_bundles" WHERE "data_bundles"."user_id" = $1  [["user_id", 2]]
+  Rendered shared/_errors.html.slim (0.1ms)
+  Rendered data_bundles/_form.html.slim (4.0ms)
+  Rendered data_bundles/index.html.slim within layouts/application (23.3ms)
+Completed 200 OK in 98ms (Views: 90.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/undefined" for 127.0.0.1 at 2016-03-14 10:22:11 +0000
+
+ActionController::RoutingError (No route matches [GET] "/undefined"):
+  actionpack (4.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  request_store (1.3.0) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (3.1.0) lib/puma/configuration.rb:227:in `call'
+  puma (3.1.0) lib/puma/server.rb:561:in `handle_request'
+  puma (3.1.0) lib/puma/server.rb:406:in `process_client'
+  puma (3.1.0) lib/puma/server.rb:271:in `block in run'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `call'
+  puma (3.1.0) lib/puma/thread_pool.rb:111:in `block in spawn_thread'
+
+
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.9ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.9ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /home/cpadurariu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (48.2ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:22:13 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.6ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2072.0ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2124ms (Views: 2120.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:22:17 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2178ms (Views: 17.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:44:17 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1935.8ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 3365ms (Views: 3361.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:44:21 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1856ms (Views: 26.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:50:43 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2136.5ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 3002ms (Views: 2999.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:50:48 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1911ms (Views: 20.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:52:38 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2044.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2933ms (Views: 2929.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:52:43 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2134ms (Views: 17.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:53:08 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1927.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2688ms (Views: 2685.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:53:12 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2424ms (Views: 17.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:54:53 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1891.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2788ms (Views: 2785.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:54:57 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2294ms (Views: 19.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:58:57 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2052.8ms)
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2933ms (Views: 2929.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:59:02 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2270ms (Views: 18.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:59:41 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1938.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1988ms (Views: 1985.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:59:44 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2267ms (Views: 21.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 10:59:47 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1884.1ms)
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 1922ms (Views: 1918.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 10:59:51 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1976ms (Views: 18.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:04:41 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2023.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2937ms (Views: 2934.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:04:46 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1938ms (Views: 16.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:06:14 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1910.8ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2745ms (Views: 2742.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:06:18 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2086ms (Views: 17.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:06:53 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1837.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2672ms (Views: 2669.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:06:57 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2049ms (Views: 20.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:07:23 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.6ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2227.3ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 3119ms (Views: 3116.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:07:58 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1839.0ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2760ms (Views: 2757.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:08:03 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2104ms (Views: 17.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:10:42 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1834.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2679ms (Views: 2676.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:10:46 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2040ms (Views: 18.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:13:46 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (2.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (1.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2333.1ms)
+  [1m[36mUser Load (1.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 3194ms (Views: 3144.3ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:13:51 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2553ms (Views: 23.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:14:59 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.7ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2036.0ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 3195ms (Views: 3192.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:15:03 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2095ms (Views: 17.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:21:33 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1973.7ms)
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2136ms (Views: 2132.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:21:37 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2146ms (Views: 18.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:23:39 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2617.0ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2674ms (Views: 2671.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:23:43 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2475ms (Views: 20.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:24:30 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1954.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2886ms (Views: 2884.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:24:34 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2055ms (Views: 22.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:25:41 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.6ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2031.4ms)
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2148ms (Views: 2144.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:25:44 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2328ms (Views: 21.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:27:17 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2109.9ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2279ms (Views: 2275.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:27:20 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2230ms (Views: 19.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:28:47 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2186.8ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2353ms (Views: 2349.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:28:50 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1995ms (Views: 18.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:29:18 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2114.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2270ms (Views: 2267.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:29:21 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2261ms (Views: 20.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:29:41 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2016.6ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2201ms (Views: 2198.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:29:45 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2120ms (Views: 17.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:30:04 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1944.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2137ms (Views: 2135.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:30:08 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2259ms (Views: 21.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:30:21 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2046.6ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2084ms (Views: 2081.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:30:24 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2011ms (Views: 19.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:32:11 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2328.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 3252ms (Views: 3249.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:32:16 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2238ms (Views: 18.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:33:51 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2019.1ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2975ms (Views: 2972.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:33:55 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1990ms (Views: 19.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:34:08 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2003.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2828ms (Views: 2825.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:34:13 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2095ms (Views: 21.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:34:29 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1928.3ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2767ms (Views: 2763.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:34:33 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2226ms (Views: 19.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:36:16 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2129.4ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2965ms (Views: 2961.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:36:20 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2043ms (Views: 30.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:40:59 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2012.6ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2075ms (Views: 2072.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:41:02 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2299ms (Views: 20.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:42:09 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1971.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2016ms (Views: 2013.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:42:13 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2214ms (Views: 26.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:42:50 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2052.7ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2092ms (Views: 2089.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:42:54 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2090ms (Views: 20.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:46:17 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2018.6ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2227ms (Views: 2224.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:46:21 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2238ms (Views: 18.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:48:32 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1958.9ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2076ms (Views: 2073.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:48:35 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2127ms (Views: 19.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 11:58:38 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2057.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2972ms (Views: 2969.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 11:58:42 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2047ms (Views: 20.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:04:24 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2066.8ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2925ms (Views: 2921.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:04:28 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2052ms (Views: 19.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:12:31 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2093.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 3032ms (Views: 3028.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:12:35 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.2ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1949ms (Views: 19.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:17:21 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1986.8ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2883ms (Views: 2879.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:17:25 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2120ms (Views: 20.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:18:35 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1896.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2748ms (Views: 2745.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:18:40 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2043ms (Views: 17.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:19:17 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1997.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2834ms (Views: 2831.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:19:21 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2119ms (Views: 20.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:20:31 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.7ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1971.9ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2807ms (Views: 2803.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:20:35 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2182ms (Views: 21.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:21:06 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1985.2ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2973ms (Views: 2971.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:21:11 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.2ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2150ms (Views: 20.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:21:53 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2111.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2987ms (Views: 2984.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:21:58 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2326ms (Views: 29.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:28:02 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1890.1ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2708ms (Views: 2705.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:28:06 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2090ms (Views: 20.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:28:31 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2080.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2954ms (Views: 2951.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:28:35 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2013ms (Views: 19.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:33:48 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2029.0ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2822ms (Views: 2819.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:33:52 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.2ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2015ms (Views: 17.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:34:18 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2021.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2866ms (Views: 2862.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:34:22 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1977ms (Views: 20.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:34:53 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1994.2ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2801ms (Views: 2798.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:34:57 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2089ms (Views: 19.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:37:54 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1872.2ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2712ms (Views: 2708.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:37:58 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2303ms (Views: 18.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:38:41 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2008.8ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2874ms (Views: 2871.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:38:45 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1979ms (Views: 23.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:39:25 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1956.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2831ms (Views: 2827.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:39:29 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2081ms (Views: 21.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:41:07 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1912.0ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2746ms (Views: 2743.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:41:12 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2239ms (Views: 22.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:44:31 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2120.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2998ms (Views: 2995.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:44:35 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 1963ms (Views: 22.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:45:21 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1966.5ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2810ms (Views: 2806.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:45:25 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 1960ms (Views: 18.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:47:43 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2026.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2896ms (Views: 2893.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:47:47 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.2ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2211ms (Views: 37.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:48:03 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2011.6ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2851ms (Views: 2848.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:48:07 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2116ms (Views: 18.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:48:21 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (1.2ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2000.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2751ms (Views: 2748.0ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:48:25 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2220ms (Views: 19.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:48:59 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1876.5ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2729ms (Views: 2725.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:49:03 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2046ms (Views: 18.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:50:08 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (2154.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2935ms (Views: 2932.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:50:12 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2083ms (Views: 21.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:50:45 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1939.9ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 2859ms (Views: 2856.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:50:49 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 10]]
+Completed 200 OK in 2002ms (Views: 18.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/10" for 127.0.0.1 at 2016-03-14 12:51:16 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+  Rendered data_bundles/show.html.slim within layouts/application (1993.4ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 2755ms (Views: 2752.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/10.json" for 127.0.0.1 at 2016-03-14 12:51:20 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"10"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 10]]
+Completed 200 OK in 2154ms (Views: 20.9ms | ActiveRecord: 0.3ms)

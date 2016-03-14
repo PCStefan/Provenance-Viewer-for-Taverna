@@ -43,7 +43,8 @@ section.content
                 #wfContainer
                   svg#graphContainer
                 button#saveWF.svgImage Save the workflow as image
-                canvas#canvasWF height="500" style="display:none" width="960" 
+                canvas#canvasWF height="500" style="display:none" width="960"
+
 
           #provenance.tab-pane
             - if @data_bundle.provenanceMain.present?
@@ -54,11 +55,14 @@ section.content
                       li.active
                         a#diagramSankey data-target="#provSankey" data-toggle="tab" Sankey
                       li
-                        a#diagramMiserables data-target="#provChord" data-toggle="tab" Chord
+                        a#diagramMiserables data-target="#provCooccurrence" data-toggle="tab" Co-occurrence
                     .tab-content
                       .provCont
                         #mapContainer
                           svg#provContainer
+                        button#enableZooming.svgImage alt=("Enabling zooming will mouse-mid button scrolling ability") type="submit" value="True" 
+                          span Enable Zooming
+
                         button#savePROV.svgImage Save the provenance as image
                         canvas#canvasPROV height="500" style="display:none" width="960" 
             - else
