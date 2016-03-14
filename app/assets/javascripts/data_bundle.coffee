@@ -24,6 +24,16 @@ $(document).ready ->
     return
   return
 
+# disable middle mouse button scrolling
+wheel = (event) ->
+  event.preventDefault()
+  event.returnValue = false
+  return
+
+if window.addEventListener
+  window.addEventListener 'DOMMouseScroll', wheel, false
+window.onmousewheel = document.onmousewheel = wheel
+
 # distingush between single click and double click
 # see http://bl.ocks.org/couchand/6394506
 
@@ -159,6 +169,24 @@ $(document).ready ->
     return
   return
 
+# some local functions for zooming in/out and for walking around
+@zoomed = ->
+  d3.select('g#zoomContainer').attr 'transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')'
+  return
+
+@dragstarted = (d) ->
+  d3.event.sourceEvent.stopPropagation()
+  d3.select(this).classed 'dragging', true
+  return
+
+@dragged = (d) ->
+  d3.select(this).attr('cx', d.x = d3.event.x).attr 'cy', d.y = d3.event.y
+  return
+
+@dragended = (d) ->
+  d3.select(this).classed 'dragging', false
+  return
+
 @draw = ->
   d3.json $('#data_bundle').attr('data-url'), (error, data) ->
     @tempgraph = $.extend(true, {}, data)
@@ -281,6 +309,18 @@ $(document).ready ->
   lowOpacity = 0.3
   hoverOpacity = 0.7
   highOpacity = 0.9
+
+  # zoom the d3 
+  zoom = d3.behavior.zoom().scaleExtent([
+    1
+    10
+  ]).on('zoom', zoomed)
+
+  # move around the d3
+  drag = d3.behavior.drag().origin((d) ->
+    d
+  ).on('dragstart', dragstarted).on('drag', dragged).on('dragend', dragended)
+
   # load the svg#sankeyContainer
   # set the width and height attributes
   # append a function g that has a tranform process defined by translation
@@ -311,9 +351,14 @@ $(document).ready ->
       'width': width
       'height': height
 
-    svg = svg.attr('width', width+150).attr('height', height+150).append('g')
+    svgContainer = svg.attr('width', width+150).attr('height', height+150).append('g').call(zoom).on("dblclick.zoom", null).on("click.zoom", null)
+    .on("mousedown.zoom", null)
+
+    rect = svgContainer.append('rect').attr('width', width).attr('height', height).style('fill', 'none').style('pointer-events', 'all')
 
     sankey = sankey.size([width, height])
+
+    svg = svgContainer.append('g').attr("id", "zoomContainer")
 
     # set the nodes
     # set the links
