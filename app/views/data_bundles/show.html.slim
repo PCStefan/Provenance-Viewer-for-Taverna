@@ -57,14 +57,26 @@ section.content
                       li
                         a#diagramMiserables data-target="#provCooccurrence" data-toggle="tab" Co-occurrence
                     .tab-content
-                      .provCont
-                        #mapContainer
-                          svg#provContainer
-                        button#enableZooming.svgImage alt=("Enabling zooming will mouse-mid button scrolling ability") type="submit" value="True" 
-                          span Enable Zooming
+                      #provSankey.tab-pane.active.fade.in 
+                        .box.box-default
+                          .box-body
+                      #provCooccurrence.tab-pane
+                        .box.box-default
+                          .box-body
+                            p
+                              | Order:
+                              select#order
+                                option value="name" by Name
+                                option value="count" by Frequency
+                                option value="group" by Type
+                    .provCont
+                      #mapContainer
+                        svg#provContainer
+                      button#enableZooming.svgImage alt=("Enabling zooming will mouse-mid button scrolling ability") type="submit" value="True" 
+                        span Enable Zooming
 
-                        button#savePROV.svgImage Save the provenance as image
-                        canvas#canvasPROV height="500" style="display:none" width="960" 
+                      button#savePROV.svgImage Save the provenance as image
+                      canvas#canvasPROV height="500" style="display:none" width="960" 
             - else
               .row No data to display
               br

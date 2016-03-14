@@ -183,8 +183,6 @@ class Provenance
         }
       }")
 
-    p sparql_query
-
     # return the result of the performing the query
     sparql_query.execute(graph)
   end

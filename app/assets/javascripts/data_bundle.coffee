@@ -345,8 +345,8 @@ $('#enableZooming').click ->
 
   if nodesCount > 0 or linksCount > 0
     ratioLN = linksCount / nodesCount * 100
-    width = width + Math.floor( ratioLN * 3 )
-    height = height + Math.floor( ratioLN * 2 )
+    width = width + Math.floor( ratioLN * 4 )
+    height = height + Math.floor( ratioLN * 4 )
     setGLWidth(width)
 
     $('canvas#canvasPROV').attr
@@ -356,20 +356,65 @@ $('#enableZooming').click ->
 
     x = d3.scale.ordinal().rangeBands([
       0
-      width
+      (width / 3)
     ])
     z = d3.scale.linear().domain([
       0
       4
     ]).clamp(true)
-    c = d3.scale.category10().domain(d3.range(10))
 
-    svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g')
+    color = d3.scale.category20()
+
+    svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g').attr('transform', 'translate(250,250)')
 
   # build a [source, target] matrix
     matrix = []
     nodes = graph.provenance.nodes
     n = nodes.length
+
+    row = (row) ->
+      cell = d3.select(this).selectAll('.cell').data(row.filter((d) ->
+        d.z + Math.floor(Math.random() * 10)
+      )).enter().append('rect').attr('class', 'cell').attr('x', (d) ->
+        x d.x
+      ).attr('width', x.rangeBand()).attr('height', x.rangeBand()).style('fill-opacity', (d) ->
+        z d.z
+      ).style('fill', (d) ->
+        if nodes[d.x].type == nodes[d.y].type then color(nodes[d.x].type) else '#c3e221'
+      ).on('mouseover', mouseover).on('mouseout', mouseout)
+      return
+
+    mouseover = (p) ->
+      d3.selectAll('.row text').classed('active', (d, i) ->
+        i == p.y
+      )
+      d3.selectAll('.column text').classed('active', (d, i) ->
+        i == p.x
+      )
+      return
+
+    mouseout = ->
+      d3.selectAll('text').classed('active', false)
+      return
+
+    order = (value) ->
+      x.domain orders[value]
+      t = svg.transition().duration(1500)
+      t.selectAll('.row').delay((d, i) ->
+        x(i) * 4
+      ).attr('transform', (d, i) ->
+        'translate(0,' + x(i) + ')'
+      ).selectAll('.cell').delay((d) ->
+        x(d.x) * 4
+      ).attr 'x', (d) ->
+        x d.x
+      t.selectAll('.column').delay((d, i) ->
+        x(i) * 4
+      ).attr 'transform', (d, i) ->
+        'translate(' + x(i) + ')rotate(-90)'
+      return
+
+
 
     # Compute index per node.
     nodes.forEach (node, i) ->
@@ -385,14 +430,14 @@ $('#enableZooming').click ->
       return
 
     # Convert links to matrix; count character occurrences.
-      graph.provenance.links.forEach (link) ->
-        matrix[link.source][link.target].z += link.value
-        matrix[link.target][link.source].z += link.value
-        matrix[link.source][link.source].z += link.value
-        matrix[link.target][link.target].z += link.value
-        nodes[link.source].count += link.value
-        nodes[link.target].count += link.value
-        return
+    graph.provenance.links.forEach (link) ->
+      matrix[link.source][link.target].z += link.value
+      matrix[link.target][link.source].z += link.value
+      matrix[link.source][link.source].z += link.value
+      matrix[link.target][link.target].z += link.value
+      nodes[link.source].count += link.value
+      nodes[link.target].count += link.value
+      return
 
     # Precompute the orders.
     orders = 
@@ -402,21 +447,20 @@ $('#enableZooming').click ->
       count: d3.range(n).sort((a, b) ->
         nodes[b].count - (nodes[a].count)
       )
-      group: d3.range(n).sort((a, b) ->
+      type: d3.range(n).sort((a, b) ->
         createGroupType(nodes[b].type) - createGroupType(nodes[a].type)
       )
-    console.log(orders)
     
     # The default sort order.
     x.domain orders.name
 
-    svg.append('rect').attr('class', 'background').attr('width', width).attr('height', height)
+    svg.append('rect').attr('class', 'misbackground').attr('width', width/3).attr('height', height/3)
 
     row = svg.selectAll('.row').data(matrix).enter().append('g').attr('class', 'row').attr('transform', (d, i) ->
       'translate(0,' + x(i) + ')'
     ).each(row)
 
-    row.append('line').attr 'x2', width
+    row.append('line').attr('x2', width/3)
 
     row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text (d, i) ->
       nodes[i].label
@@ -425,12 +469,16 @@ $('#enableZooming').click ->
       'translate(' + x(i) + ')rotate(-90)'
     )
 
-    column.append('line').attr 'x1', -width
+    column.append('line').attr('x1', width/-3)
     
     column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text (d, i) ->
       nodes[i].label
 
-
+    d3.select('#order').on 'change', ->
+      # clearTimeout timeout
+      order @value
+      return
+  
   return
 
 
