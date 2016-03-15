@@ -212,6 +212,33 @@ $('#enableZooming').click ->
 
     return
   return
+# create function that to split the text into multiple lines for the svg-text
+# cannot find something like this online
+@wrapNoNewLine = (text) ->
+  text.each ->
+    text = d3.select(this)
+    labels = text.text().split("\\n")
+    text.text(null)
+
+    line = []
+
+    lineNumber = 1
+    if(labels.length != 0)
+      lineNumber = (-1) * (Math.floor(labels.length / 2) - 1)
+
+    lineHeight = 1.1
+    final = ''
+    for temp in labels
+      final += temp.substring(temp.lastIndexOf(' ')) + ', '
+     
+    final = final[0...-2]
+    text.append('tspan').attr('x', text.attr('x')).attr('y', text.attr('y')).attr('dy', lineHeight + 'em' ).text(final).filter((d) ->
+        d.x < glob_width / 5
+      ).attr('x', "22")
+      
+    return
+  return
+
 
 # some local functions for zooming in/out and for walking around
 @zoomed = ->
@@ -462,8 +489,12 @@ $('#enableZooming').click ->
 
     row.append('line').attr('x2', width/3)
 
-    row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text (d, i) ->
-      nodes[i].label
+    row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text((d, i) ->
+      if nodes[i].hasOwnProperty("label")
+        nodes[i].label 
+      else
+        shortenStringNoMiddle(nodes[i].name)
+    ).call(wrapNoNewLine)
 
     column = svg.selectAll('.column').data(matrix).enter().append('g').attr('class', 'column').attr('transform', (d, i) ->
       'translate(' + x(i) + ')rotate(-90)'
@@ -471,8 +502,12 @@ $('#enableZooming').click ->
 
     column.append('line').attr('x1', width/-3)
     
-    column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text (d, i) ->
-      nodes[i].label
+    column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text((d, i) ->
+      if nodes[i].hasOwnProperty("label")
+        nodes[i].label 
+      else
+        shortenStringNoMiddle(nodes[i].name)
+    ).call(wrapNoNewLine)
 
     d3.select('#order').on 'change', ->
       # clearTimeout timeout
@@ -517,7 +552,7 @@ $('#enableZooming').click ->
   if nodesCount > 0 or linksCount > 0
     ratioLN = linksCount / nodesCount * 100
     width = width + Math.floor( ratioLN * 3 )
-    height = height + Math.floor( ratioLN * 2 )
+    height = height + Math.floor( ratioLN * 1.5 )
     setGLWidth(width)
 
     $('canvas#canvasPROV').attr
