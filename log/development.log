@@ -58942,3 +58942,147 @@ Processing by DataBundlesController#show as JSON
   Parameters: {"id"=>"3"}
   [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
 Completed 200 OK in 942ms (Views: 4.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:15:23 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (774.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1707ms (Views: 1704.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:15:26 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+Completed 200 OK in 876ms (Views: 4.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:20:17 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (747.9ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 1779ms (Views: 1776.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:20:20 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 1090ms (Views: 4.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:20:26 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (769.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1678ms (Views: 1675.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:20:29 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+Completed 200 OK in 905ms (Views: 10.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:20:49 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (786.3ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 1669ms (Views: 1665.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:20:52 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 837ms (Views: 5.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:21:35 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (918.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1849ms (Views: 1845.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:21:38 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.4ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+Completed 200 OK in 840ms (Views: 5.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:27:53 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (710.6ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 1697ms (Views: 1693.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:27:56 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.3ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 753ms (Views: 4.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:28:57 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.6ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (736.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1715ms (Views: 1712.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:29:00 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+Completed 200 OK in 741ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:35:30 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.5ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (762.5ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+Completed 200 OK in 1771ms (Views: 1768.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:35:33 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mDataBundle Load (0.4ms)[0m  [1mSELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 753ms (Views: 4.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/data_bundles/3" for 127.0.0.1 at 2016-03-16 00:36:22 +0000
+Processing by DataBundlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.5ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered data_bundles/show.html.slim within layouts/application (775.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 1662ms (Views: 1659.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/data_bundles/3.json" for 127.0.0.1 at 2016-03-16 00:36:25 +0000
+Processing by DataBundlesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[35mDataBundle Load (0.3ms)[0m  SELECT  "data_bundles".* FROM "data_bundles" WHERE "data_bundles"."id" = $1 LIMIT 1  [["id", 3]]
+Completed 200 OK in 752ms (Views: 5.0ms | ActiveRecord: 0.3ms)

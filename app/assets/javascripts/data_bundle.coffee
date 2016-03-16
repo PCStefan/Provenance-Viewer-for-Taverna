@@ -434,6 +434,24 @@ $('#enableZooming').click ->
         else
           transition = createGroupType(nodes[d.x].type) * 10 + createGroupType(nodes[d.y].type)
           getColorTransitionTypeHex(transition)
+      ).append('title').text((d) ->
+        str = nodes[d.x].type + ' → ' + nodes[d.y].type
+        str += dashLine + 'Source: ' + nodes[d.x].name
+
+        if createGroupType(nodes[d.x].type) == 2 # if process
+          str += '\n\n' + getTimes(nodes[d.x])
+        else if createGroupType(nodes[d.x].type) > 2 # if artifact or dictionary
+          if nodes[d.x].content?
+            str += '\n\n' + shortenString(nodes[d.x].content, 500)
+
+        str += dashLine + 'Target: ' + nodes[d.y].name
+        if createGroupType(nodes[d.y].type) == 2 # if process
+          str += '\n\n' + getTimes(nodes[d.y])
+        else if createGroupType(nodes[d.y].type) > 2 # if artifact or dictionary
+          if nodes[d.y].content?
+            str += '\n\n' + shortenString(nodes[d.y].content, 500)
+
+        str
       ).on('mouseover', mouseover).on('mouseout', mouseout)
       return
 
@@ -698,8 +716,8 @@ $('#enableZooming').click ->
     # set the text for the edges
     link.append('title').text (d) ->
       dash = '\n-----------------------------------------------------------\n'
-      startText = d.source.type + ' → ' + d.target.type + dash + d.source.type + ':\nURI: ' +  d.source.name
-      endText = d.target.type + ':\nURI: ' + d.target.name
+      startText = d.source.type + ' → ' + d.target.type + dash + 'Source:\nURI: ' +  d.source.name
+      endText = 'Target:\nURI: ' + d.target.name
       startText + dash + endText
 
     # create the function to drag the node 
