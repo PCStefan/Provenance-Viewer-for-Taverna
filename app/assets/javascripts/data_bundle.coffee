@@ -127,11 +127,32 @@ $('#enableZooming').click ->
   colorType = undefined
   switch source
     when 'Workflow Run' then colorType = '#0eff7f'
-    when 'Process Run' then colorType = '#1f77b4'
+    when 'Process Run' then colorType = '#258fda'
     when 'Artifact' then colorType = '#ff7f0e'
     when 'Dictionary' then colorType = '#7f0eff'
     else colorType = color(stringTextForColor.replace(RegExp(' .*'), ''))
   colorType
+
+@getColorTransitionTypeHex =(value) ->
+
+  color = d3.scale.category20()
+  colorType = undefined
+  switch value
+    when 11 then colorType = '#004d24' # wfprov:wasPartOfWorkflow
+    when 12 then colorType = '#c3e221' # this case should not exist
+    when 13 then colorType = '#009947' # wfprov:usedInputArtifact
+    when 14 then colorType = '#003318' # -----  // ------Dictionary
+    when 21 then colorType = '#258fda' # wasPartOfWorkflow
+    when 23 then colorType = '#7cbce9' # usedInputArtifact
+    when 24 then colorType = '#12476d' # usedInputDictionary
+    when 31 then colorType = '#ffc999' # wasoutputFromWf
+    when 32 then colorType = '#ff7f0e' # wasOutputFromProcess
+    when 34 then colorType = '#663000' # insertInList
+    when 41 then colorType = '#bb80ff' # output from wf
+    when 42 then colorType = '#7f0eff' #outputFromProcess
+    when 43 then colorType = '#3c0080' #split
+    when 44 then colorType = '#990000' # insert into another funct
+    else '#c3e221'
 
 @createGroupType =(type) ->
   group = -1
@@ -226,7 +247,7 @@ $('#enableZooming').click ->
     if(labels.length != 0)
       lineNumber = (-1) * (Math.floor(labels.length / 2) - 1)
 
-    lineHeight = 1.1
+    lineHeight = 0.15
     final = ''
     for temp in labels
       final += temp.substring(temp.lastIndexOf(' ')) + ', '
@@ -363,7 +384,7 @@ $('#enableZooming').click ->
 
 
 @draw_miserables = ->
-  width = 950
+  width = 1580
   height = 750
 
   # compute a better width and height for the container
@@ -371,9 +392,10 @@ $('#enableZooming').click ->
   linksCount = Object.keys(graph.provenance.links).length
 
   if nodesCount > 0 or linksCount > 0
-    ratioLN = linksCount / nodesCount * 100
-    width = width + Math.floor( ratioLN * 4 )
-    height = height + Math.floor( ratioLN * 4 )
+    ratioN = 1.0 * nodesCount * 10
+    width = width + 25
+    height = height 
+    divider = 3
     setGLWidth(width)
 
     $('canvas#canvasPROV').attr
@@ -383,7 +405,7 @@ $('#enableZooming').click ->
 
     x = d3.scale.ordinal().rangeBands([
       0
-      (width / 3)
+      (5600 / divider)
     ])
     z = d3.scale.linear().domain([
       0
@@ -392,7 +414,7 @@ $('#enableZooming').click ->
 
     color = d3.scale.category20()
 
-    svg = d3.select('svg#provContainer').attr('width', width).attr('height', height).append('g').attr('transform', 'translate(250,250)')
+    svg = d3.select('svg#provContainer').attr('width', width+602).attr('height', height+535).append('g').attr('transform', 'translate(350,277)')
 
   # build a [source, target] matrix
     matrix = []
@@ -407,7 +429,11 @@ $('#enableZooming').click ->
       ).attr('width', x.rangeBand()).attr('height', x.rangeBand()).style('fill-opacity', (d) ->
         z d.z
       ).style('fill', (d) ->
-        if nodes[d.x].type == nodes[d.y].type then color(nodes[d.x].type) else '#c3e221'
+        if d.x == d.y 
+          '#000000'
+        else
+          transition = createGroupType(nodes[d.x].type) * 10 + createGroupType(nodes[d.y].type)
+          getColorTransitionTypeHex(transition)
       ).on('mouseover', mouseover).on('mouseout', mouseout)
       return
 
@@ -456,12 +482,52 @@ $('#enableZooming').click ->
       )
       return
 
+    # Add the legend 
+
+    legendCategories = { "category":[{"name":"Workflow Run -wasPartOfWorkflow- Workflow Run", "transition":"11"},
+                                     {"name":"Workflow Run -usedInput- Artifact", "transition":"13"},
+                                     {"name":"Workflow Run -usedInput- Dictionary", "transition":"14"},
+                                     {"name":"Process Run -wasPartOfWorkflow- Workflow Run", "transition":"21"},
+                                     {"name":"Process Run -usedInput- Artifact", "transition":"23"},
+                                     {"name":"Process Run -usedInput- Dictionary", "transition":"24"},
+                                     {"name":"Artifact -wasOutputFrom- Workflow Run", "transition":"31"},
+                                     {"name":"Artifact -wasOutputFrom- Process Run", "transition":"32"},
+                                     {"name":"Artifact -isIntegratedIn- Dictionary", "transition":"34"},
+                                     {"name":"Dictionary -wasOutputFrom- Artifact", "transition":"41"},
+                                     {"name":"Dictionary -wasOutputFrom- Artifact", "transition":"42"},
+                                     {"name":"Dictionary -hasMember- Artifact", "transition":"43"},
+                                     {"name":"Dictionary -isSplit/PushedInto- Dictionary", "transition":"44"}]}
+
+    legend = svg.append('g').attr('class', 'legend').attr('x', 0).attr('y', 0).selectAll('.category').data(legendCategories.category).enter().append('g').attr('class', 'category')
+
+    legendConfig =
+      rectWidth: 20
+      rectHeight: 14
+      xOffset: -350
+      yOffset: -275
+      xOffsetText: 26
+      yOffsetText: -10
+      lineHeight: 10
+      wordApart: 20
+
+    legendConfig.yOffsetText += 20
+    legendConfig.xOffsetText += legendConfig.xOffset
+
+    legend.append('rect').attr('y', (d, i) ->
+      legendConfig.yOffset + i * legendConfig.wordApart
+    ).attr('x', legendConfig.xOffset).attr('height', legendConfig.rectHeight).attr('width', legendConfig.rectWidth).style('fill', (d) ->
+      getColorTransitionTypeHex(parseInt(d.transition))
+    ).style('stroke', '#000000')
+
+    legend.append('text').attr('y', (d, i) ->
+      legendConfig.yOffset + i * legendConfig.wordApart + legendConfig.yOffsetText
+    ).attr('x', legendConfig.xOffsetText).text((d) ->
+      d.name
+    )
+
     # Convert links to matrix; count character occurrences.
     graph.provenance.links.forEach (link) ->
-      matrix[link.source][link.target].z += link.value
-      matrix[link.target][link.source].z += link.value
-      matrix[link.source][link.source].z += link.value
-      matrix[link.target][link.target].z += link.value
+      matrix[link.source][link.target].z = createGroupType(nodes[link.source].type) * 10 + createGroupType(nodes[link.target].type)
       nodes[link.source].count += link.value
       nodes[link.target].count += link.value
       return
@@ -481,13 +547,13 @@ $('#enableZooming').click ->
     # The default sort order.
     x.domain orders.name
 
-    svg.append('rect').attr('class', 'misbackground').attr('width', width/3).attr('height', height/3)
+    #svg.append('rect').attr('class', 'misbackground').attr('width', width/divider).attr('height', height/divider)
 
     row = svg.selectAll('.row').data(matrix).enter().append('g').attr('class', 'row').attr('transform', (d, i) ->
       'translate(0,' + x(i) + ')'
     ).each(row)
 
-    row.append('line').attr('x2', width/3)
+    row.append('line').attr('x2', 5600/divider)
 
     row.append('text').attr('x', -6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'end').text((d, i) ->
       if nodes[i].hasOwnProperty("label")
@@ -500,7 +566,7 @@ $('#enableZooming').click ->
       'translate(' + x(i) + ')rotate(-90)'
     )
 
-    column.append('line').attr('x1', width/-3)
+    column.append('line').attr('x1', 5600/divider * (-1))
     
     column.append('text').attr('x', 6).attr('y', x.rangeBand() / 2).attr('dy', '.32em').attr('text-anchor', 'start').text((d, i) ->
       if nodes[i].hasOwnProperty("label")
@@ -552,7 +618,7 @@ $('#enableZooming').click ->
   if nodesCount > 0 or linksCount > 0
     ratioLN = linksCount / nodesCount * 100
     width = width + Math.floor( ratioLN * 3 )
-    height = height + Math.floor( ratioLN * 1.5 )
+    height = height + Math.floor( ratioLN  )
     setGLWidth(width)
 
     $('canvas#canvasPROV').attr

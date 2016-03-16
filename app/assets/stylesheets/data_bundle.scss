@@ -69,6 +69,7 @@
   overflow : auto;
   padding : 0px;
   margin: 0px;
+  max-height: 960px;
 }
 
 #wfContainer {
@@ -86,13 +87,27 @@
 }
 
 .misbackground {
-  fill: #ecf0f5;
+  fill: red;
+  /*fill: #ecf0f5;*/
+  border: 1px solid #000;
 }
 
 line {
-  stroke: #fff;
+  stroke: #0bb;
 }
 
 text.active {
   fill: red;
+}
+.row, .column {
+  border-left: 1px solid #000;
+}
+
+#order {
+  margin-left: 10px;
+}
+
+#porder {
+  margin-left: 32px;
+  margin-top: 20px;
 }
