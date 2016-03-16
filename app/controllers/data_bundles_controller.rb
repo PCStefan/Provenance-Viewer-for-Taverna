@@ -71,6 +71,11 @@ class DataBundlesController < ApplicationController
     redirect_to data_bundles_url, notice: 'Data bundle was successfully destroyed.'
   end
 
+  def redirectToLogin
+    redirect_to new_user_session_path, notice: 'Data bundle was successfully created.'
+  end
+  helper_method :redirectToLogin
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_data_bundle
