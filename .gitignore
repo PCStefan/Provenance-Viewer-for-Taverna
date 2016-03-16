@@ -12,7 +12,7 @@
 !/log/.keep
 /tmp
 database.yml
-public/uploads
+public/uploads/*
 vendor/assets/bower_components
 .env
 tmp/*

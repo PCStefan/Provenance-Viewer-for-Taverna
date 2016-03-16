@@ -394,7 +394,7 @@ $('#enableZooming').click ->
   if nodesCount > 0 or linksCount > 0
     ratioN = 1.0 * nodesCount * 10
     width = width + 25
-    height = height 
+    height = width 
     divider = 3
     setGLWidth(width)
 
@@ -429,8 +429,9 @@ $('#enableZooming').click ->
       ).attr('width', x.rangeBand()).attr('height', x.rangeBand()).style('fill-opacity', (d) ->
         z d.z
       ).style('fill', (d) ->
-        if d.x == d.y 
-          '#000000'
+        console.log(d.x + " .. " + d.y)
+        if d.x == d.y
+          "#123456"
         else
           transition = createGroupType(nodes[d.x].type) * 10 + createGroupType(nodes[d.y].type)
           getColorTransitionTypeHex(transition)
